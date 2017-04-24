@@ -1,3 +1,5 @@
+package models;
+
 /**
  * Created by Brian on 24/04/2017.
  */
@@ -7,7 +9,7 @@ public abstract class Person {
     private String address;
     private String gender;
 
-    //Constructor for class Person
+    //Constructor for class models.Person
     public Person (String email, String name, String address, String gender)
     {
         this.email = email;
@@ -41,5 +43,5 @@ public abstract class Person {
                 + "\nAddress: " + address
                 + "\nGender: " + gender;
     }
-    
+
 }
