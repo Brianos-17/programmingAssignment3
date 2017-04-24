@@ -28,84 +28,68 @@ public class Assessment {
     }
 
     //Mutator Methods
-    public void setWeight(double weight)
-    {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public void setChest(double chest)
-    {
+    public void setChest(double chest) {
         this.chest = chest;
     }
 
-    public void setThigh(double thigh)
-    {
+    public void setThigh(double thigh) {
         this.thigh = thigh;
     }
 
-    public void setUpperArm(double upperArm)
-    {
+    public void setUpperArm(double upperArm) {
         this.upperArm = upperArm;
     }
 
-    public void setWaist(double waist)
-    {
+    public void setWaist(double waist) {
         this.waist = waist;
     }
 
-    public void setHips(double hips)
-    {
+    public void setHips(double hips) {
         this.hips = hips;
     }
 
-    public void setComment(String comment)
-    {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public void setTrainer(Trainer trainer)
-    {
+    public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
     }
 
     //Accessor Methods
-    public double getWeight()
-    {
+    public double getWeight() {
         return weight;
     }
 
-    public double getChest()
-    {
+    public double getChest() {
         return chest;
     }
 
-    public double getThigh()
-    {
+    public double getThigh() {
         return thigh;
     }
 
-    public double getUpperArm()
-    {
+    public double getUpperArm() {
         return upperArm;
     }
 
-    public double getWaist()
-    {
+    public double getWaist() {
         return waist;
     }
 
-    public double getHips()
-    {
+    public double getHips() {
         return hips;
     }
 
-    public String getComment()
-    {
+    public String getComment() {
         return comment;
     }
 
-    public Trainer getTrainer()
-    {
+    public Trainer getTrainer() {
         return trainer;
     }
 }

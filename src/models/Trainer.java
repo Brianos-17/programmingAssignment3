@@ -11,4 +11,14 @@ public class Trainer extends Person {
         super(email, name, address, gender);
         this.speciality = speciality;
     }
+
+    //Mutator Method
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    //Accessor Method
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
 }

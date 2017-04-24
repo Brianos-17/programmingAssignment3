@@ -2,6 +2,7 @@ package models;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.SortedSet;
 
 /**
  * Created by Brian on 24/04/2017.
@@ -56,4 +57,18 @@ public abstract class Member extends Person {
     public void setMemberProgress(HashMap<Date, Assessment> memberProgress) {
         this.memberProgress = memberProgress;
     }
+
+    //Returns the latest assessment based on last entry (by calendar date)
+    public Assessment latestAssessment() {
+        
+    }
+
+    //Returns the assessments dates sorted in date order
+    public SortedSet<Date> sortedAssessmentDates() {
+
+    }
+
+    //The concrete implementation of this method will be completed in member subclasses
+    public abstract void chosenPackage(String chosenPackage);
+
 }
