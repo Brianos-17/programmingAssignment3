@@ -12,17 +12,48 @@ public abstract class Member extends Person {
     private String chosenPackage;
     private HashMap<Date, Assessment> memberProgress;
 
-    public Member (String email, String name, String address, String gender,
-                   double height, double startingWeight, String chosenPackage, HashMap memberProgress)
-    {
+    public Member(String email, String name, String address, String gender,
+                  double height, double startingWeight, String chosenPackage, HashMap memberProgress) {
         super(email, name, address, gender);
-        if ((height >= 1) && (height <= 3))
-        {
-            this.height=height;
+        if ((height >= 1) && (height <= 3)) {
+            this.height = height;
         }
-        if ((startingWeight >= 35) && (startingWeight <= 250))
-        {
-            this.startingWeight=startingWeight;
+        if ((startingWeight >= 35) && (startingWeight <= 250)) {
+            this.startingWeight = startingWeight;
         }
+    }
+
+    //Accessor Methods
+    public double getHeight() {
+        return height;
+    }
+
+    public double getStartingWeight() {
+        return startingWeight;
+    }
+
+    public String getChosenPackage() {
+        return chosenPackage;
+    }
+
+    public HashMap<Date, Assessment> getMemberProgress() {
+        return memberProgress;
+    }
+
+    //Mutator Methods
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setStartingWeight(double startingWeight) {
+        this.startingWeight = startingWeight;
+    }
+
+    public void setChosenPackage(String chosenPackage) {
+        this.chosenPackage = chosenPackage;
+    }
+
+    public void setMemberProgress(HashMap<Date, Assessment> memberProgress) {
+        this.memberProgress = memberProgress;
     }
 }
