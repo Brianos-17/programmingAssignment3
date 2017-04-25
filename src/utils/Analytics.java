@@ -13,19 +13,19 @@ public class Analytics {
     }
 
     public static String determineBMICategory(double bmiValue) {
-        if (calculateBMI() < 15) {
+        if (bmiValue < 15) {
             return "VERY SEVERELY UNDERWEIGHT";
-        } else if ((calculateBMI() >= 15) && (calculateBMI() < 16)) {
+        } else if ((bmiValue >= 15) && (bmiValue < 16)) {
             return "SEVERELY UNDERWEIGHT";
-        } else if ((calculateBMI() >= 16) && (calculateBMI() < 18.5)) {
+        } else if ((bmiValue >= 16) && (bmiValue < 18.5)) {
             return "UNDERWEIGHT";
-        } else if ((calculateBMI() >= 18.5) && (calculateBMI() < 25)) {
+        } else if ((bmiValue >= 18.5) && (bmiValue < 25)) {
             return "NORMAL";
-        } else if ((calculateBMI() >= 25) && (calculateBMI() < 30)) {
+        } else if ((bmiValue >= 25) && (bmiValue < 30)) {
             return "OVERWEIGHT";
-        } else if ((calculateBMI() >= 30) && (calculateBMI() < 35)) {
+        } else if ((bmiValue >= 30) && (bmiValue < 35)) {
             return "MODERATELY OBESE";
-        } else if ((calculateBMI() >= 35) && (calculateBMI() < 40)) {
+        } else if ((bmiValue >= 35) && (bmiValue < 40)) {
             return "SEVERELY OBESE";
         } else {
             return "VERY SEVERELY OBESE";
@@ -36,13 +36,16 @@ public class Analytics {
         if (member.getGender().equals("M")) {
             if (convertHeightMetresToInches(member) > 60) {
                 if ((((convertHeightMetresToInches(member) - 60) * 2.3) + 50) <= ((assessment.getWeight() + 2))
-                        && ((((convertHeightMetresToInches(member) - 60) * 2.3) + 50) >= ((assessment.getWeight()) - 2))))
-                {
+                        && ((((convertHeightMetresToInches(member) - 60) * 2.3) + 50) >= ((assessment.getWeight()) - 2))) {
                     return true;
+                } else {
+                    return false;
                 }
             } else {
                 if ((50) <= ((assessment.getWeight() + 2)) && ((50) >= ((assessment.getWeight() - 2)))) {
                     return true;
+                } else {
+                    return false;
                 }
             }
         } else {
@@ -50,13 +53,18 @@ public class Analytics {
                 if ((((convertHeightMetresToInches(member) - 60) * 2.3) + 45.5) <= ((assessment.getWeight() + 2))
                         && ((((convertHeightMetresToInches(member) - 60) * 2.3) + 45.5) >= ((assessment.getWeight() - 2)))) {
                     return true;
+                } else {
+                    return false;
                 }
             } else {
                 if ((45.5) <= ((assessment.getWeight() + 2)) && ((45.5) >= ((assessment.getWeight() - 2)))) {
                     return true;
+                } else {
+                    return false;
                 }
             }
         }
+
     }
 
     private static double convertHeightMetresToInches(Member member) {

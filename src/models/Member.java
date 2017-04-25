@@ -14,7 +14,7 @@ public abstract class Member extends Person {
     private HashMap<Date, Assessment> memberProgress;
 
     public Member(String email, String name, String address, String gender,
-                  double height, double startingWeight, String chosenPackage, HashMap memberProgress) {
+                  double height, double startingWeight, String chosenPackage) {
         super(email, name, address, gender);
         if ((height >= 1) && (height <= 3)) {
             this.height = height;
@@ -22,45 +22,55 @@ public abstract class Member extends Person {
         if ((startingWeight >= 35) && (startingWeight <= 250)) {
             this.startingWeight = startingWeight;
         }
+        this.chosenPackage = chosenPackage;
+        HashMap<Date, Assessment> memberProgress = new HashMap<>();
     }
 
     //Accessor Methods
     public double getHeight() {
+
         return height;
     }
 
     public double getStartingWeight() {
+
         return startingWeight;
     }
 
     public String getChosenPackage() {
+
         return chosenPackage;
     }
 
     public HashMap<Date, Assessment> getMemberProgress() {
+
         return memberProgress;
     }
 
     //Mutator Methods
     public void setHeight(double height) {
+
         this.height = height;
     }
 
     public void setStartingWeight(double startingWeight) {
+
         this.startingWeight = startingWeight;
     }
 
     public void setChosenPackage(String chosenPackage) {
+
         this.chosenPackage = chosenPackage;
     }
 
     public void setMemberProgress(HashMap<Date, Assessment> memberProgress) {
+
         this.memberProgress = memberProgress;
     }
 
     //Returns the latest assessment based on last entry (by calendar date)
     public Assessment latestAssessment() {
-        
+
     }
 
     //Returns the assessments dates sorted in date order
