@@ -21,4 +21,8 @@ public class Trainer extends Person {
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
+
+    public String toString(){
+        return super.toString() + "Speciality: " + speciality;
+    }
 }

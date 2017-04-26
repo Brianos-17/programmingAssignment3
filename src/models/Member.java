@@ -28,44 +28,42 @@ public abstract class Member extends Person {
 
     //Accessor Methods
     public double getHeight() {
-
         return height;
     }
 
     public double getStartingWeight() {
-
         return startingWeight;
     }
 
     public String getChosenPackage() {
-
         return chosenPackage;
     }
 
     public HashMap<Date, Assessment> getMemberProgress() {
-
         return memberProgress;
     }
 
     //Mutator Methods
     public void setHeight(double height) {
-
         this.height = height;
     }
 
     public void setStartingWeight(double startingWeight) {
-
         this.startingWeight = startingWeight;
     }
 
     public void setChosenPackage(String chosenPackage) {
-
         this.chosenPackage = chosenPackage;
     }
 
     public void setMemberProgress(HashMap<Date, Assessment> memberProgress) {
-
         this.memberProgress = memberProgress;
+    }
+
+    public String toString(){
+        return super.toString() + "Height: " + height
+                +  "Starting Weight: " + startingWeight
+                + "Chosen Package: " + chosenPackage;
     }
 
     //Returns the latest assessment based on last entry (by calendar date)

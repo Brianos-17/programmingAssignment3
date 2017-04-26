@@ -17,4 +17,8 @@ public class PremiumMember extends Member {
     public void chosenPackage(String packageChoice) {
         getChosenPackage();
     }
+
+    public String toString(){
+        return super.toString();
+    }
 }

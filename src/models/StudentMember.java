@@ -38,4 +38,9 @@ public class StudentMember extends Member {
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
     }
+
+    public String toString(){
+        return super.toString() + "Student ID: " + studentId
+                + "College Name: " + collegeName;
+    }
 }

@@ -3,6 +3,7 @@ package controllers;
 import models.Member;
 import models.Person;
 import models.Trainer;
+
 import java.util.ArrayList;
 
 /**
@@ -12,87 +13,105 @@ public class GymApi {
     private ArrayList<Member> members;
     private ArrayList<Trainer> trainers;
 
-    public GymApi(){
+    public GymApi() {
         ArrayList<Member> members = new ArrayList<>();
         ArrayList<Trainer> trainers = new ArrayList<>();
     }
 
-    public void addMember(Member member){
+    public void addMember(Member member) {
         members.add(member);
     }
 
-    public void addTrainer(Trainer trainer){
+    public void addTrainer(Trainer trainer) {
         trainers.add(trainer);
     }
 
-    public int numberOfMembers(){
+    public int numberOfMembers() {
         return members.size();
     }
 
-    public int numberOfTrainers(){
+    public int numberOfTrainers() {
         return trainers.size();
     }
 
-    public ArrayList<Member> getMembers(){
+    public ArrayList<Member> getMembers() {
         return members;
     }
 
-    public ArrayList<Trainer> getTrainers(){
+    public ArrayList<Trainer> getTrainers() {
         return trainers;
     }
 
-    public boolean isValidMemberIndex(int index){
-        if(index <= (members.size()-1) && (index > -1)){
+    public boolean isValidMemberIndex(int index) {
+        if (index <= (members.size() - 1) && (index > -1)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    public boolean isValidTrainerIndex(int index){
-        if(index <= (trainers.size() -1) && (index > -1)){
+    public boolean isValidTrainerIndex(int index) {
+        if (index <= (trainers.size() - 1) && (index > -1)) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Member searchMembersByEmail(String emailEntered) {
+        int i = 0;
+        while(i < members.size()){
+            if(members.get(i).getEmail().equals(emailEntered)){
+                 return members.get(i);
+            }
+            i++;
+        }
+        if(members.get(i) != null){
+            return members.get(i);
         }
         else{
-            return false;
+            return null;
         }
     }
 
-    public Member searchMembersByEmail(String emailEntered){
+    public String searchMembersByName(String nameEntered) {
+    }
+
+    public Person searchTrainersByEmail(String emailEntered) {
         int i = 0;
-        while(i <= members.size()){
-            if(members.get(i).getEmail().equals(emailEntered)){
-              return members.get(i);
+        while(i < trainers.size()){
+            if(trainers.get(i).getEmail().equals(emailEntered)){
+                return trainers.get(i);
             }
-            else{
-                return null;
-            }
-            i ++;
+            i++;
+        }
+        if(trainers.get(i) != null){
+            return trainers.get(i);
+        }
+        else{
+            return null;
         }
     }
 
-    public String searchMembersByName(String nameEntered){
-    }
-
-    public Person searchTrainersByEmail(String emailEntered){
-    }
-
-    public String listMembers(){
+    public String listMembers() {
         String list = "";
-        for(int i = 0; i <= members.size(); i ++){
-            list = "Member Details; "
-                    + "\nMember Name: " + members.get(i).getName()
-                    + "\nMember E-Mail: " + members.get(i).getEmail()
-                    + "\nMember Address: " + members.get(i).getAddress()
-                    + "\nMember Gender: " + members.get(i).getGender()
-                    + "\nMember Height: " + members.get(i).getHeight()
-                    + "\nMember Starting Weight: " + members.get(i).getStartingWeight()
-                    + "\nMember Package: " + members.get(i).getChosenPackage();
-          if(members.get(i).getChosenPackage().equals("student")){
-            list = list + "\nStudent ID: " + members.get(i).getStudentId()
-                    + "\nCollege Name: " + members.get(i).getCollegeName()
+        for (int i = 0; i <= members.size(); i++) {
+            list = list + members.get(i).toString();
+        }
+        return list;
+    }
+
+    public String listMembersWithIdealWeight(){
+        if(members.size() > 0){
+            int i = 0;
+            while(i < members.size()){
+                if(members.get(i).isIdealBodyWeight().equals(true))
             }
+        }
+        else{
+            return "There are currently no members in the Gym";
         }
     }
 }
+
+
