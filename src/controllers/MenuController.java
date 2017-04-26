@@ -99,7 +99,6 @@ public class MenuController {
 
         }
     }
-}
 
     private void runMenu() {
         welcomeMenu();

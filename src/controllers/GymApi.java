@@ -3,6 +3,12 @@ package controllers;
 import models.Member;
 import models.Person;
 import models.Trainer;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import java.util.ArrayList;
 
@@ -102,5 +108,31 @@ public class GymApi {
             }
         }
     }
+
+    public String listMembersBySpecificBMICategory (String category){
+
+    }
+
+    public String listMemberDetailsImperialAndMetric (){
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public void load() throws Exception{
+        XStream xstream = new XStream(new DomDriver());
+        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("gym.xml"));
+        members = (ArrayList<Member>) is.readObject();
+        trainers = (ArrayList<Trainer>) is.readObject();
+        is.close();
+    }
+
+    public void store() throws Exception{
+        XStream xstream = new XStream(new DomDriver());
+        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("gym.xml"));
+        out.writeObject(members);
+        out.writeObject(trainers);
+        out.close();
+    }
+}
 
 

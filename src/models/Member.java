@@ -61,8 +61,8 @@ public abstract class Member extends Person {
     }
 
     public String toString(){
-        return super.toString() + "Height: " + height
-                +  "Starting Weight: " + startingWeight
+        return super.toString() + "Height(in metres): " + height
+                +  "Starting Weight(in kgs): " + startingWeight
                 + "Chosen Package: " + chosenPackage;
     }
 
