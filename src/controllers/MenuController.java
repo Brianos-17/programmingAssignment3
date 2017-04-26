@@ -23,7 +23,7 @@ public class MenuController {
     private MenuController() {
         input = new Scanner(System.in);
         gym = new GymApi();
-        runMenu();
+        welcomeMenu();
     }
 
     private void welcomeMenu() {
@@ -36,7 +36,7 @@ public class MenuController {
                 String validEmail = validNextString("Please enter your e-mail address: ");
                 if (gym.searchMembersByEmail(validEmail) != null) {
                     System.out.println("Welcome! You have logged in successfully!");
-                    //Move on to next menu
+                    runMemberMenu();
                 } else {
                     System.out.println("There is no Member registered to this email. Access Denied.");
                     //Include code to exit system
@@ -45,7 +45,7 @@ public class MenuController {
                 String validEmail = validNextString("Please enter your e-mail address: ");
                 if (gym.searchTrainersByEmail(validEmail) != null) {
                     System.out.print("Welcome! You have logged in successfully!");
-                    //Move on to next menu
+                    runTrainerMenu();
                 } else {
                     System.out.println("There is no Trainer registered to this email. Access Denied.");
                     //Include code to exit system
@@ -67,6 +67,8 @@ public class MenuController {
                     double startingWeight = validNextDouble("Please enter your current weight: ");
                     String chosenPackage = "Premium";
                     gym.addMember(new PremiumMember(email, name, address, gender, height, startingWeight, chosenPackage));
+                    System.out.println("Congratulations you have successfully registered!");
+                    runMemberMenu();
                 }
                 else if(premiumOrStudent.toLowerCase().equals("s")){
                     System.out.println("Please enter your details: ");
@@ -80,6 +82,8 @@ public class MenuController {
                     String collegeName = validNextString("Please enter your College's Name: ");
                     String chosenPackage = "Student";
                     gym.addMember(new StudentMember(email, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
+                    System.out.println("Congratulations you have successfully registered!");
+                    runMemberMenu();
                 }
                 else{
                     System.out.println("Invalid option entered. Please try again: ");
@@ -93,6 +97,8 @@ public class MenuController {
                 String gender = validNextString("Please enter your gender [M/F]: ");
                 String speciality = validNextString("Please enter your speciality: ");
                 gym.addTrainer(new Trainer(email, name, address, gender, speciality));
+                System.out.println("Congratulations you have successfully registered!");
+                runTrainerMenu();
             } else {
                 System.out.println("Invalid option entered. Please try again: ");
             }
@@ -100,7 +106,40 @@ public class MenuController {
         }
     }
 
-    private void runMenu() {
-        welcomeMenu();
+    private int memberMenu(){
+        System.out.println("Welcome to your Member menu!");
+        System.out.println("---------------");
+        System.out.println("1) View your profile");
+        System.out.println("2) Update your profile");
+        System.out.println("3) View your progress");
+        System.out.println("---------------");
+        System.out.println("0) Exit");
+        int option = validNextInt("==>");
+        return option;
+    }
+
+    private int trainerMenu(){
+        System.out.println("Welcome to your Trainer menu!");
+        System.out.println("---------------");
+        System.out.println("1) Add a new member");
+        System.out.println("2) List all members");
+        System.out.println("3) Search for member by email");
+        System.out.println("4) Search for member by name");
+        System.out.println("5) List members with an ideal body weight");
+        System.out.println("6) List members by a specific BMI category");
+        System.out.println("---------------");
+        System.out.println("7) Assessments");
+        System.out.println("8) Reports");
+        System.out.println("---------------");
+        System.out.println("0) Exit");
+        int option = validNextInt("==>");
+        return option;
+    }
+
+    private void runMemberMenu(){
+
+    }
+    private void runTrainerMenu(){
+
     }
 }

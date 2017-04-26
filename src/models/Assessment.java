@@ -92,4 +92,17 @@ public class Assessment {
     public Trainer getTrainer() {
         return trainer;
     }
+
+    public String toString(){
+        return "Weight: " + getWeight()
+                + "\nChest: " + getChest()
+                + "\nThigh: " + getThigh()
+                + "\nUpper Arm: " + getUpperArm()
+                + "\nWaist: " + getWaist()
+                + "\nHip: " + getHips()
+                + "\nTrainer's Comment: " + getComment()
+                + "\nTrainer: " + getTrainer();
+    }
 }
+
+

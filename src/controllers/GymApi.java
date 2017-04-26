@@ -97,6 +97,18 @@ public class GymApi {
         return list;
     }
 
+    //StringBuilder list = new StringBuilder();
+    //    for (int i = 0; i <= members.size(); i++) {
+    //    list.append(i + ") " + members.toString() + "\n");
+    //}
+    //   if(list.toString().equals("")){
+    //    return "There are currently no members in the Gym.";
+    //}
+    //   else{
+    //    return list.toString();
+    //}
+
+
     public String listMembersWithIdealWeight() {
         if (members.size() > 0) {
             int i = 0;
