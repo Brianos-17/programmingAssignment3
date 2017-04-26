@@ -11,20 +11,10 @@ public abstract class Person {
 
     //Constructor for class models.Person
     public Person(String email, String name, String address, String gender) {
-        this.email = email;
-        if (name.length() > 30) {
-            this.name = name.substring(0, 30);
-        } else {
-            this.name = name;
-        }
-        this.address = address;
-        if ((gender.toLowerCase().equals("male")) || (gender.toLowerCase().equals("m"))) {
-            this.gender = "M";
-        } else if (gender.toLowerCase().equals("female") || (gender.toLowerCase().equals("f"))) {
-            this.gender = "F";
-        } else {
-            this.gender = "Unspecified";
-        }
+        setEmail(email);
+        setName(name);
+        setAddress(address);
+        setGender(gender);
     }
 
     public String toString() {
@@ -59,7 +49,11 @@ public abstract class Person {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name.length() > 30) {
+            this.name = name.substring(0, 30);
+        } else {
+            this.name = name;
+        }
     }
 
     public void setAddress(String address) {
@@ -67,6 +61,12 @@ public abstract class Person {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        if ((gender.toLowerCase().equals("male")) || (gender.toLowerCase().equals("m"))) {
+            this.gender = "M";
+        } else if (gender.toLowerCase().equals("female") || (gender.toLowerCase().equals("f"))) {
+            this.gender = "F";
+        } else {
+            this.gender = "Unspecified";
+        }
     }
 }

@@ -60,18 +60,13 @@ public class GymApi {
 
     public Member searchMembersByEmail(String emailEntered) {
         int i = 0;
-        while(i < members.size()){
-            if(members.get(i).getEmail().equals(emailEntered)){
-                 return members.get(i);
+        while (i < members.size()) {
+            if (members.get(i).getEmail().equals(emailEntered)) {
+                return members.get(i);
             }
             i++;
         }
-        if(members.get(i) != null){
-            return members.get(i);
-        }
-        else{
-            return null;
-        }
+        return null;
     }
 
     public String searchMembersByName(String nameEntered) {
@@ -79,18 +74,13 @@ public class GymApi {
 
     public Person searchTrainersByEmail(String emailEntered) {
         int i = 0;
-        while(i < trainers.size()){
-            if(trainers.get(i).getEmail().equals(emailEntered)){
+        while (i < trainers.size()) {
+            if (trainers.get(i).getEmail().equals(emailEntered)) {
                 return trainers.get(i);
             }
             i++;
         }
-        if(trainers.get(i) != null){
-            return trainers.get(i);
-        }
-        else{
-            return null;
-        }
+        return null;
     }
 
     public String listMembers() {
@@ -101,17 +91,16 @@ public class GymApi {
         return list;
     }
 
-    public String listMembersWithIdealWeight(){
-        if(members.size() > 0){
+    public String listMembersWithIdealWeight() {
+        if (members.size() > 0) {
             int i = 0;
-            while(i < members.size()){
-                if(members.get(i).isIdealBodyWeight().equals(true))
+            while (i < members.size()) {
+                if (members.get(i).isIdealBodyWeight().equals(true)) {
+                } else {
+                    return "There are currently no members in the Gym";
+                }
             }
         }
-        else{
-            return "There are currently no members in the Gym";
-        }
     }
-}
 
 

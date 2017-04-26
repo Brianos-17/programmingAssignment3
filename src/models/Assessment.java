@@ -18,13 +18,13 @@ public class Assessment {
         if ((weight >= 35) && (weight <= 250)) {
             this.weight = weight;
         }
-        this.chest = chest;
-        this.thigh = thigh;
-        this.upperArm = upperArm;
-        this.waist = waist;
-        this.hips = hips;
-        this.comment = comment;
-        this.trainer = trainer;
+        setChest(chest);
+        setThigh(thigh);
+        setUpperArm(upperArm);
+        setWaist(waist);
+        setHips(hips);
+        setComment(comment);
+        setTrainer(trainer);
     }
 
     //Mutator Methods

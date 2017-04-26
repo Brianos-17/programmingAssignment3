@@ -13,4 +13,10 @@ public class ScannerInput {
         System.out.print(prompt);
         return input.nextLine();
     }
+
+    public static double validNextDouble(String prompt){
+        Scanner input = new Scanner(System.in);
+        System.out.print(prompt);
+        return input.nextDouble();
+    }
 }

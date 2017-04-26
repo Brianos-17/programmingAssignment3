@@ -16,13 +16,9 @@ public abstract class Member extends Person {
     public Member(String email, String name, String address, String gender,
                   double height, double startingWeight, String chosenPackage) {
         super(email, name, address, gender);
-        if ((height >= 1) && (height <= 3)) {
-            this.height = height;
-        }
-        if ((startingWeight >= 35) && (startingWeight <= 250)) {
-            this.startingWeight = startingWeight;
-        }
-        this.chosenPackage = chosenPackage;
+        setHeight(height);
+        setStartingWeight(startingWeight);
+        setChosenPackage(chosenPackage);
         HashMap<Date, Assessment> memberProgress = new HashMap<>();
     }
 
@@ -45,11 +41,15 @@ public abstract class Member extends Person {
 
     //Mutator Methods
     public void setHeight(double height) {
-        this.height = height;
+        if ((height >= 1) && (height <= 3)) {
+            this.height = height;
+        }
     }
 
     public void setStartingWeight(double startingWeight) {
-        this.startingWeight = startingWeight;
+        if ((startingWeight >= 35) && (startingWeight <= 250)) {
+            this.startingWeight = startingWeight;
+        }
     }
 
     public void setChosenPackage(String chosenPackage) {

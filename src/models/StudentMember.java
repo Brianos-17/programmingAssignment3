@@ -10,11 +10,11 @@ public class StudentMember extends Member {
     private String studentId;
     private String collegeName;
 
-    public StudentMember(String email, String name, String address, String gender, String studentId, String collegeName,
-                         double height, double startingWeight, String chosenPackage) {
+    public StudentMember(String email, String name, String address, String gender,
+                         double height, double startingWeight, String chosenPackage,  String studentId, String collegeName) {
         super( email, name, address, gender, height, startingWeight, chosenPackage);
-        this.studentId = studentId;
-        this.collegeName = collegeName;
+        setStudentId(studentId);
+        setCollegeName(collegeName);
     }
 
     public void chosenPackage(String packageChoice) {
