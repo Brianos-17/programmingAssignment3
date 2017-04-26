@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Scanner;
 
+
 /**
  * Created by Brian on 24/04/2017.
  */

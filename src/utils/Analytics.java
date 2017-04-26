@@ -64,7 +64,6 @@ public class Analytics {
                 }
             }
         }
-
     }
 
     private static double convertHeightMetresToInches(Member member) {
