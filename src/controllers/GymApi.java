@@ -3,10 +3,12 @@ package controllers;
 import models.Member;
 import models.Person;
 import models.Trainer;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -76,9 +78,19 @@ public class GymApi {
     }
 
     public String searchMembersByName(String nameEntered) {
+        if (members.size() > 0) {
+            for (int i = 0; i < members.size(); i++) {
+                if (members.get(i).getName().contains(nameEntered)) {
+                    return members.get(i).toString();
+                } else {
+                    return "There are no members in the gym matching your search. Please try again.";
+                }
+            }
+        }
+        return "There are currently no members in the gym.";
     }
 
-    public Person searchTrainersByEmail(String emailEntered) {
+    public Trainer searchTrainersByEmail(String emailEntered) {
         int i = 0;
         while (i < trainers.size()) {
             if (trainers.get(i).getEmail().equals(emailEntered)) {
@@ -97,40 +109,29 @@ public class GymApi {
         return list;
     }
 
-    //StringBuilder list = new StringBuilder();
-    //    for (int i = 0; i <= members.size(); i++) {
-    //    list.append(i + ") " + members.toString() + "\n");
-    //}
-    //   if(list.toString().equals("")){
-    //    return "There are currently no members in the Gym.";
-    //}
-    //   else{
-    //    return list.toString();
-    //}
-
 
     public String listMembersWithIdealWeight() {
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
                 if (members.get(i).isIdealBodyWeight().equals(true)) {
-                } else {
-                    return "There are currently no members in the Gym";
                 }
             }
+        } else {
+            return "There are currently no members in the Gym";
         }
     }
 
-    public String listMembersBySpecificBMICategory (String category){
+    public String listMembersBySpecificBMICategory(String category) {
 
     }
 
-    public String listMemberDetailsImperialAndMetric (){
+    public String listMemberDetailsImperialAndMetric() {
 
     }
 
     @SuppressWarnings("unchecked")
-    public void load() throws Exception{
+    public void load() throws Exception {
         XStream xstream = new XStream(new DomDriver());
         ObjectInputStream is = xstream.createObjectInputStream(new FileReader("gym.xml"));
         members = (ArrayList<Member>) is.readObject();
@@ -138,7 +139,7 @@ public class GymApi {
         is.close();
     }
 
-    public void store() throws Exception{
+    public void store() throws Exception {
         XStream xstream = new XStream(new DomDriver());
         ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("gym.xml"));
         out.writeObject(members);

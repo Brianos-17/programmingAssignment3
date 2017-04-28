@@ -1,5 +1,7 @@
 package utils;
 
+import models.Trainer;
+
 import java.util.Scanner;
 
 

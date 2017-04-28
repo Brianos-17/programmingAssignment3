@@ -19,7 +19,7 @@ public abstract class Member extends Person {
         setHeight(height);
         setStartingWeight(startingWeight);
         setChosenPackage(chosenPackage);
-        HashMap<Date, Assessment> memberProgress = new HashMap<>();
+        HashMap <Date, Assessment> memberProgress = new HashMap<>();
     }
 
     //Accessor Methods
@@ -35,7 +35,7 @@ public abstract class Member extends Person {
         return chosenPackage;
     }
 
-    public HashMap<Date, Assessment> getMemberProgress() {
+    public HashMap getMemberProgress() {
         return memberProgress;
     }
 
@@ -56,8 +56,8 @@ public abstract class Member extends Person {
         this.chosenPackage = chosenPackage;
     }
 
-    public void setMemberProgress(HashMap<Date, Assessment> memberProgress) {
-        this.memberProgress = memberProgress;
+    public void setMemberProgress(Date date, Assessment assessment) {
+        memberProgress.put(date, assessment);
     }
 
     public String toString(){
@@ -68,7 +68,6 @@ public abstract class Member extends Person {
 
     //Returns the latest assessment based on last entry (by calendar date)
     public Assessment latestAssessment() {
-
     }
 
     //Returns the assessments dates sorted in date order

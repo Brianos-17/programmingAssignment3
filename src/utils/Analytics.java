@@ -73,4 +73,5 @@ public class Analytics {
     private static double toTwoDecimalPlaces(double num) {
         return (int) (num * 100) / 100.0;
     }
+
 }
