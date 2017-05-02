@@ -69,14 +69,18 @@ public class GymApi {
     }
 
     public Member searchMembersByEmail(String emailEntered) {
-        int i = 0;
-        while (i < members.size()) {
-            if (members.get(i).getEmail().equals(emailEntered)) {
-                return members.get(i);
+        if (members.size() > 0) {
+            int i = 0;
+            while (i < members.size()) {
+                if (members.get(i).getEmail().equals(emailEntered)) {
+                    return members.get(i);
+                }
+                i++;
             }
-            i++;
+            return null;
         }
-        return null;
+        else
+            return null;
     }
 
     public String searchMembersByName(String nameEntered) {

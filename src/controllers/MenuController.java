@@ -37,7 +37,7 @@ public class MenuController {
         if (input.toUpperCase().equals("L")) {
             String memberOrTrainer = validNextString("Are you logging in as a Member or as a Trainer? [M/T]");
             if (memberOrTrainer.toUpperCase().equals("M")) {
-                String validEmail = validNextString("Please enter your e-mail address: ");
+                validEmail = validNextString("Please enter your e-mail address: ");
                 if (gym.searchMembersByEmail(validEmail) != null) {
                     System.out.println("Welcome! You have logged in successfully!");
                     runMemberMenu();
@@ -46,7 +46,7 @@ public class MenuController {
                     //Include code to exit system
                 }
             } else if (memberOrTrainer.toUpperCase().equals("T")) {
-                String validEmail = validNextString("Please enter your e-mail address: ");
+                validEmail = validNextString("Please enter your e-mail address: ");
                 if (gym.searchTrainersByEmail(validEmail) != null) {
                     System.out.print("Welcome! You have logged in successfully!");
                     runTrainerMenu();
@@ -74,8 +74,7 @@ public class MenuController {
                 System.out.println("Congratulations you have successfully registered!");
                 runTrainerMenu();
             } else {
-                System.out.println("Invalid option entered. Please try again: ")
-                ;
+                System.out.println("Invalid option entered. Please try again: ");
             }
 
         }
@@ -90,7 +89,7 @@ public class MenuController {
                     System.out.println(gym.searchMembersByEmail(validEmail).toString());
                     break;
                 case 2:
-                    register();
+                    register();//Cant update email. Will have to look at this.
                     break;
                 case 3:
                     int memberSubMenu = memberSubMenu();
@@ -334,10 +333,10 @@ public class MenuController {
     private void register() {
         String input = validNextString("Would you like to register as a Premium Member or a Student Member? [P/S]");
         System.out.println("Please enter your details: ");
-        String email = validNextString("Please enter your email: ");
-        while (gym.searchMembersByEmail(email) != null){
+        validEmail = validNextString("Please enter your email: ");
+        if (gym.searchMembersByEmail(validEmail) != null){
             System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
-            email = validNextString("Please enter your email: ");
+            validEmail = validNextString("Please enter your email: ");
         }
         String name = validNextString("Please enter your name: ");
         String address = validNextString("Please enter your address: ");
@@ -348,9 +347,9 @@ public class MenuController {
         if (input.toUpperCase().equals("S")) {
             String studentId = validNextString("Please enter your Student ID: ");
             String collegeName = validNextString("Please enter your College's Name: ");
-            gym.addMember(new StudentMember(email, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
+            gym.addMember(new StudentMember(validEmail, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
         } else if (input.toUpperCase().equals("P")) {
-            gym.addMember(new PremiumMember(email, name, address, gender, height, startingWeight, chosenPackage));
+            gym.addMember(new PremiumMember(validEmail, name, address, gender, height, startingWeight, chosenPackage));
         } else
             System.out.println("Invalid option. Please try again: ");
     }
