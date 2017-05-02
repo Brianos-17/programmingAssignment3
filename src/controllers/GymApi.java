@@ -2,6 +2,7 @@ package controllers;
 
 import models.Member;
 import models.Trainer;
+
 import static utils.Analytics.*;
 
 import java.io.ObjectInputStream;
@@ -116,11 +117,9 @@ public class GymApi {
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
-                if(isIdealBodyWeight(members.get(i), members.get(i).latestAssessment()))
-                {
+                if (isIdealBodyWeight(members.get(i), members.get(i).latestAssessment())) {
                     list.append(members.get(i));
-                }
-                else{
+                } else {
                     return "There are no members in the gym with an Ideal Body Weight.";
                 }
                 i++;
@@ -143,8 +142,7 @@ public class GymApi {
                     return "There are no members in the gym matching this category.";
                 }
             }
-        }
-        else {
+        } else {
             return "There are currently no members in the Gym.";
         }
         return list.toString();
@@ -152,16 +150,15 @@ public class GymApi {
 
     public String listMemberDetailsImperialAndMetric() {
         StringBuilder list = new StringBuilder();
-        if(members.size() > 0){
+        if (members.size() > 0) {
             int i = 0;
-            while (i < members.size()){
+            while (i < members.size()) {
                 list.append(members.get(i).getName()).append(": ").append(members.get(i).latestAssessment().getWeight())
-                .append(" KGs ( ").append(convertWeightKgToPounds(members.get(i).latestAssessment())).append(" lbs) ")
-                .append(members.get(i).getHeight()).append(" Metres ( ").append(convertHeightMetresToInches(members.get(i)))
-                .append(" inches).\n");
+                        .append(" KGs ( ").append(convertWeightKgToPounds(members.get(i).latestAssessment())).append(" lbs) ")
+                        .append(members.get(i).getHeight()).append(" Metres ( ").append(convertHeightMetresToInches(members.get(i)))
+                        .append(" inches).\n");
             }
-        }
-        else{
+        } else {
             return "There are currently no members in ths Gym.";
         }
         return list.toString();

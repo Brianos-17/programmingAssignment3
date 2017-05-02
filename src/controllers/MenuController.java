@@ -18,6 +18,7 @@ import static utils.ScannerInput.*;
 public class MenuController {
     private GymApi gym;
     private Scanner input;
+    private static String validEmail;
 
     public static void main(String[] args) {
         new MenuController();
@@ -73,7 +74,8 @@ public class MenuController {
                 System.out.println("Congratulations you have successfully registered!");
                 runTrainerMenu();
             } else {
-                System.out.println("Invalid option entered. Please try again: ");
+                System.out.println("Invalid option entered. Please try again: ")
+                ;
             }
 
         }
@@ -84,14 +86,53 @@ public class MenuController {
         while (option != 0) {
             switch (option) {
                 case 1:
+                    System.out.println("Here is your current profile: ");
+                    System.out.println(gym.searchMembersByEmail(validEmail).toString());
                     break;
                 case 2:
+                    register();
                     break;
                 case 3:
+                    int memberSubMenu = memberSubMenu();
+                    while (memberSubMenu != 0) {
+                        switch (memberSubMenu) {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break;
+                            default:
+                                System.out.println("Invalid option entered. Please try again.");
+                                break;
+                        }
+                        System.out.println("\nPress and key to continue: ");
+                        input.nextLine();
+                        input.nextLine();
+                        memberSubMenu = memberSubMenu();
+                    }
+                    System.out.println("Exiting back to Member menu...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option entered. Please try again.");
                     break;
             }
+            System.out.println("\nPress and key to continue: ");
+            input.nextLine();
+            input.nextLine();
+            option = memberMenu();
         }
+        System.out.println("Exiting the program. Goodbye...");
+        System.exit(0);
     }
+
 
     private void runTrainerMenu() {
         int option = trainerMenu();
@@ -132,7 +173,7 @@ public class MenuController {
                     int assessmentOption = assessmentSubMenu();
                     while (assessmentOption != 0) {
                         switch (assessmentOption) {
-                            case 1: //Adds a new assessment for a specified Member and adds it to their Hash-map memberProgress
+                            case 1: //Adds a new assessment for a specified Member and adds it to their Hash-map: memberProgress
                                 String assessedEmail = validNextString("Please enter the email of the Member you are adding an assessment for: ");
                                 Member assessedMember = gym.searchMembersByEmail(assessedEmail);
                                 System.out.println(assessedMember.getName());
@@ -164,7 +205,7 @@ public class MenuController {
                                 }
                                 break;
                             default:
-                                System.out.println("Invalid option entered. Please try again");
+                                System.out.println("Invalid option entered. Please try again.");
                                 break;
                         }
                         System.out.println("\nPress and key to continue: ");
@@ -176,6 +217,31 @@ public class MenuController {
                     System.exit(0);
                     break;
                 case 8://Report Sub menu
+                    int reportOption = reportSubMenu();
+                    while (reportOption != 0) {
+                        switch (reportOption) {
+                            case 1: //Specific member progress (via email search)
+                                String reportEmail = validNextString("Please enter the email of the of the member you are looking for: ");
+                                gym.searchMembersByEmail(reportEmail).getMemberProgress();
+                                break;
+                            case 2: //Specific member progress (via name search)
+                                String reportName = validNextString("Please enter the name of the member you are looking for: ");
+                                gym.searchMembersByName(reportName);
+                                //Need to finish this method!!!
+                                break;
+                            case 3:// Need more clarification here!!!!
+                                break;
+                            default:
+                                System.out.println("Invalid option entered. Please try again.");
+                                break;
+                        }
+                        System.out.println("\nPress any key to continue: ");
+                        input.nextLine();
+                        input.nextLine();
+                        reportOption = reportSubMenu();
+                    }
+                    System.out.println("Exiting back to Trainer menu...");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid option entered. Please try again.");
@@ -203,7 +269,7 @@ public class MenuController {
         return option;
     }
 
-    private int subMemberMenu() {
+    private int memberSubMenu() {
         System.out.println("Welcome to your Member menu!");
         System.out.println("---------------");
         System.out.println("x) View your profile");
@@ -261,14 +327,18 @@ public class MenuController {
         System.out.println("   -- 3) Show overall member progress");
         System.out.println("   -----------------)");
         System.out.println("   -- 0) Exit to main menu");
-        int option = validNextInt("==>");
-        return option;
+        int reportOption = validNextInt("==>");
+        return reportOption;
     }
 
     private void register() {
         String input = validNextString("Would you like to register as a Premium Member or a Student Member? [P/S]");
         System.out.println("Please enter your details: ");
         String email = validNextString("Please enter your email: ");
+        while (gym.searchMembersByEmail(email) != null){
+            System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
+            email = validNextString("Please enter your email: ");
+        }
         String name = validNextString("Please enter your name: ");
         String address = validNextString("Please enter your address: ");
         String gender = validNextString("Please enter your gender [M/F]: ");
