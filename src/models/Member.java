@@ -1,8 +1,7 @@
 package models;
 
-import java.util.Date;
+import java.util.*;
 import java.util.HashMap;
-import java.util.SortedSet;
 
 /**
  * Created by Brian on 24/04/2017.
@@ -19,7 +18,7 @@ public abstract class Member extends Person {
         setHeight(height);
         setStartingWeight(startingWeight);
         setChosenPackage(chosenPackage);
-        HashMap <Date, Assessment> memberProgress = new HashMap<>();
+        HashMap<Date, Assessment> memberProgress = new HashMap<>();
     }
 
     //Accessor Methods
@@ -60,19 +59,22 @@ public abstract class Member extends Person {
         memberProgress.put(date, assessment);
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + "Height(in metres): " + height
-                +  "Starting Weight(in kgs): " + startingWeight
+                + "Starting Weight(in kgs): " + startingWeight
                 + "Chosen Package: " + chosenPackage;
     }
 
     //Returns the latest assessment based on last entry (by calendar date)
     public Assessment latestAssessment() {
+         return memberProgress.get(sortedAssessmentDates().last());
     }
 
     //Returns the assessments dates sorted in date order
     public SortedSet<Date> sortedAssessmentDates() {
-
+        SortedSet<Date> sortedAssessmentDates = new TreeSet<>(memberProgress.keySet());
+        sortedAssessmentDates.addAll(memberProgress.keySet());
+        return sortedAssessmentDates;
     }
 
     //The concrete implementation of this method will be completed in member subclasses
