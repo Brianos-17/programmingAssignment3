@@ -332,25 +332,28 @@ public class MenuController {
 
     private void register() {
         String input = validNextString("Would you like to register as a Premium Member or a Student Member? [P/S]");
-        System.out.println("Please enter your details: ");
-        validEmail = validNextString("Please enter your email: ");
-        if (gym.searchMembersByEmail(validEmail) != null){
-            System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
+        if ((input.toUpperCase().equals("P")) || (input.toUpperCase().equals("S"))) {
+            System.out.println("Please enter your details: ");
             validEmail = validNextString("Please enter your email: ");
-        }
-        String name = validNextString("Please enter your name: ");
-        String address = validNextString("Please enter your address: ");
-        String gender = validNextString("Please enter your gender [M/F]: ");
-        double height = validNextDouble("Please enter your height: ");
-        double startingWeight = validNextDouble("Please enter your current weight: ");
-        String chosenPackage = validNextString("Please enter your chosen gym package: ");
-        if (input.toUpperCase().equals("S")) {
-            String studentId = validNextString("Please enter your Student ID: ");
-            String collegeName = validNextString("Please enter your College's Name: ");
-            gym.addMember(new StudentMember(validEmail, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
-        } else if (input.toUpperCase().equals("P")) {
-            gym.addMember(new PremiumMember(validEmail, name, address, gender, height, startingWeight, chosenPackage));
-        } else
+            while (gym.searchMembersByEmail(validEmail) != null) {
+                System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
+                validEmail = validNextString("Please enter your email: ");
+            }
+            String name = validNextString("Please enter your name: ");
+            String address = validNextString("Please enter your address: ");
+            String gender = validNextString("Please enter your gender [M/F]: ");
+            double height = validNextDouble("Please enter your height: ");
+            double startingWeight = validNextDouble("Please enter your current weight: ");
+            String chosenPackage = validNextString("Please enter your chosen gym package: ");
+            if (input.toUpperCase().equals("S")) {
+                String studentId = validNextString("Please enter your Student ID: ");
+                String collegeName = validNextString("Please enter your College's Name: ");
+                gym.addMember(new StudentMember(validEmail, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
+            } else if (input.toUpperCase().equals("P")) {
+                gym.addMember(new PremiumMember(validEmail, name, address, gender, height, startingWeight, chosenPackage));
+            }
+        } else{
             System.out.println("Invalid option. Please try again: ");
+        }
     }
 }
