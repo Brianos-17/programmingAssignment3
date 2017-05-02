@@ -79,6 +79,118 @@ public class MenuController {
         }
     }
 
+    private void runMemberMenu() {
+        int option = memberMenu();
+        while (option != 0) {
+            switch (option) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+        }
+    }
+
+    private void runTrainerMenu() {
+        int option = trainerMenu();
+        while (option != 0) {
+            switch (option) {
+                case 1:
+                    register();
+                    break;
+                case 2:
+                    gym.listMembers();
+                    break;
+                case 3:
+                    String emailSearch = validNextString("Please enter the email you wish to search by: ");
+                    gym.searchMembersByEmail(emailSearch);
+                    break;
+                case 4:
+                    String nameSearch = validNextString("Please enter the name you wish to search by: ");
+                    gym.searchMembersByName(nameSearch);
+                    break;
+                case 5: //List members with an ideal body weight
+                    gym.listMembersWithIdealWeight();
+                    break;
+                case 6: //List members with a specific BMI category
+                    System.out.println("Please select the category of BMI you wish to search by: "
+                            + "\n VERY SEVERELY UNDERWEIGHT"
+                            + "\n SEVERELY UNDERWEIGHT"
+                            + "\n UNDERWEIGHT"
+                            + "\n NORMAL"
+                            + "\n OVERWEIGHT"
+                            + "\n MODERATELY OBESE"
+                            + "\n SEVERELY OBESE"
+                            + "\n VERY SEVERELY OBESE");
+                    input.nextLine();
+                    String category = input.nextLine();
+                    gym.listMembersBySpecificBMICategory(category);
+                    break;
+                case 7: //Assessment Sub menu
+                    int assessmentOption = assessmentSubMenu();
+                    while (assessmentOption != 0) {
+                        switch (assessmentOption) {
+                            case 1: //Adds a new assessment for a specified Member and adds it to their Hash-map memberProgress
+                                String assessedEmail = validNextString("Please enter the email of the Member you are adding an assessment for: ");
+                                Member assessedMember = gym.searchMembersByEmail(assessedEmail);
+                                System.out.println(assessedMember.getName());
+                                String input = validNextString("Is this the correct member? [Y/N]");
+                                if (input.toUpperCase().equals("Y")) {
+                                    System.out.println("Please enter this members assessment details: ");
+                                    double weight = validNextDouble("Weight: ");
+                                    double chest = validNextDouble("Chest: ");
+                                    double thigh = validNextDouble("Thigh: ");
+                                    double upperArm = validNextDouble("Upper Arm: ");
+                                    double waist = validNextDouble("Waist: ");
+                                    double hips = validNextDouble("Hips: ");
+                                    String comment = validNextString("Trainer's Comment: ");
+                                    String name = validNextString("Trainer Name: ");
+                                    Trainer trainer = gym.searchTrainersByEmail(name);
+                                    Assessment assessment = new Assessment(weight, chest, thigh, upperArm, waist, hips, comment, trainer);
+                                    Date date = new Date();
+                                    assessedMember.setMemberProgress(date, assessment);
+                                    System.out.println("New assessment has been added.");
+                                }
+                                break;
+                            case 2:
+                                String commentEmail = validNextString("Please enter the email of the Member who's comment you would like to update: ");
+                                Member commentMember = gym.searchMembersByEmail(commentEmail);
+                                System.out.println(commentMember.getName());
+                                String check = validNextString("Is this the correct Member? [Y/N]");
+                                if (check.toUpperCase().equals("Y")) {
+                                    commentMember.getMemberProgress();
+                                }
+                                break;
+                            default:
+                                System.out.println("Invalid option entered. Please try again");
+                                break;
+                        }
+                        System.out.println("\nPress and key to continue: ");
+                        input.nextLine();
+                        input.nextLine();
+                        assessmentOption = assessmentSubMenu();
+                    }
+                    System.out.println("Exiting back to Trainer menu...");
+                    System.exit(0);
+                    break;
+                case 8://Report Sub menu
+                    break;
+                default:
+                    System.out.println("Invalid option entered. Please try again.");
+                    break;
+            }
+            System.out.println("\nPress and key to continue: ");
+            input.nextLine();
+            input.nextLine();
+            option = trainerMenu();
+        }
+        System.out.println("Exiting the program. Goodbye...");
+        System.exit(0);
+    }
+
+
     private int memberMenu() {
         System.out.println("Welcome to your Member menu!");
         System.out.println("---------------");
@@ -151,104 +263,6 @@ public class MenuController {
         System.out.println("   -- 0) Exit to main menu");
         int option = validNextInt("==>");
         return option;
-    }
-
-    private void runMemberMenu() {
-        int option = memberMenu();
-        while (option != 0) {
-            switch (option) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-        }
-    }
-
-    private void runTrainerMenu() {
-        int option = trainerMenu();
-        while (option != 0) {
-            switch (option) {
-                case 1:
-                    register();
-                    break;
-                case 2:
-                    gym.listMembers();
-                    break;
-                case 3:
-                    String emailSearch = validNextString("Please enter the email you wish to search by: ");
-                    gym.searchMembersByEmail(emailSearch);
-                    break;
-                case 4:
-                    String nameSearch = validNextString("Please enter the name you wish to search by: ");
-                    gym.searchMembersByName(nameSearch);
-                    break;
-                case 5: //List members with an ideal body weight
-                    break;
-                case 6: //List members with a specific BMI category
-                    break;
-                case 7: //Assessment Sub menu
-                    int assessmentOption = assessmentSubMenu();
-                    while (assessmentOption != 0) {
-                        switch (assessmentOption) {
-                            case 1: //Adds a new assessment for a specified Member and adds it to their Hash-map memberProgress
-                                String assessedEmail = validNextString("Please enter the email of the Member you are adding an assessment for: ");
-                                Member assessedMember = gym.searchMembersByEmail(assessedEmail);
-                                System.out.println(assessedMember.getName());
-                                String input = validNextString("Is this the correct member? [Y/N]");
-                                if (input.toUpperCase().equals("Y")) {
-                                    System.out.println("Please enter this members assessment details: ");
-                                    double weight = validNextDouble("Weight: ");
-                                    double chest = validNextDouble("Chest: ");
-                                    double thigh = validNextDouble("Thigh: ");
-                                    double upperArm = validNextDouble("Upper Arm: ");
-                                    double waist = validNextDouble("Waist: ");
-                                    double hips = validNextDouble("Hips: ");
-                                    String comment = validNextString("Trainer's Comment: ");
-                                    String name = validNextString("Trainer Name: ");
-                                    Trainer trainer = gym.searchTrainersByEmail(name);
-                                    Assessment assessment = new Assessment(weight, chest, thigh, upperArm, waist, hips, comment, trainer);
-                                    Date date = new Date();
-                                    assessedMember.setMemberProgress(date, assessment);
-                                    System.out.println("New assessment has been added.");
-                                }
-                                break;
-                            case 2:
-                                String commentEmail = validNextString("Please enter the email of the Member who's comment you would like to update: ");
-                                Member commentMember = gym.searchMembersByEmail(commentEmail);
-                                System.out.println(commentMember.getName());
-                                String check = validNextString("Is this the correct Member? [Y/N]");
-                                if (check.toUpperCase().equals("Y")) {
-                                    commentMember.getMemberProgress();
-                                }
-                                break;
-                            default:
-                                System.out.println("Invalid option entered. Please try again");
-                                break;
-                        }
-                        System.out.println("\nPress and key to continue: ");
-                        input.nextLine();
-                        input.nextLine();
-                        assessmentOption = assessmentSubMenu();
-                    }
-                    System.out.println("Exiting back to Trainer menu...");
-                    System.exit(0);
-                    break;
-                case 8://Report Sub menu
-                    break;
-                default:
-                    System.out.println("Invalid option entered. Please try again.");
-                    break;
-            }
-            System.out.println("\nPress and key to continue: ");
-            input.nextLine();
-            input.nextLine();
-            option = trainerMenu();
-        }
-        System.out.println("Exiting the program. Goodbye...");
-        System.exit(0);
     }
 
     private void register() {

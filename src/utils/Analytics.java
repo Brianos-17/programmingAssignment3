@@ -66,8 +66,12 @@ public class Analytics {
         }
     }
 
-    private static double convertHeightMetresToInches(Member member) {
+    public static double convertHeightMetresToInches(Member member) {
         return toTwoDecimalPlaces(member.getHeight() * 39.37);
+    }
+
+    public static double convertWeightKgToPounds(Assessment assessment){
+        return toTwoDecimalPlaces((assessment.getWeight()) *2.2 );
     }
 
     private static double toTwoDecimalPlaces(double num) {

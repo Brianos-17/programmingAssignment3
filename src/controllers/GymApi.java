@@ -1,8 +1,8 @@
 package controllers;
 
 import models.Member;
-import models.Person;
 import models.Trainer;
+import static utils.Analytics.*;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,6 +13,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by Brian on 25/04/2017.
@@ -111,23 +112,59 @@ public class GymApi {
 
 
     public String listMembersWithIdealWeight() {
+        StringBuilder list = new StringBuilder();
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
-                if (members.get(i).isIdealBodyWeight().equals(true)) {
+                if(isIdealBodyWeight(members.get(i), members.get(i).latestAssessment()))
+                {
+                    list.append(members.get(i));
                 }
+                else{
+                    return "There are no members in the gym with an Ideal Body Weight.";
+                }
+                i++;
             }
         } else {
-            return "There are currently no members in the Gym";
+            return "There are currently no members in the Gym.";
         }
+        return "The following members have an Ideal Body Weight: " + list.toString();
     }
 
     public String listMembersBySpecificBMICategory(String category) {
-
+        StringBuilder list = new StringBuilder();
+        if (members.size() > 0) {
+            int i = 0;
+            while (i < members.size()) {
+                if (determineBMICategory(
+                        calculateBMI(members.get(i), members.get(i).latestAssessment())).equals(category)) {
+                    list.append(members.get(i));
+                } else {
+                    return "There are no members in the gym matching this category.";
+                }
+            }
+        }
+        else {
+            return "There are currently no members in the Gym.";
+        }
+        return list.toString();
     }
 
     public String listMemberDetailsImperialAndMetric() {
-
+        StringBuilder list = new StringBuilder();
+        if(members.size() > 0){
+            int i = 0;
+            while (i < members.size()){
+                list.append(members.get(i).getName()).append(": ").append(members.get(i).latestAssessment().getWeight())
+                .append(" KGs ( ").append(convertWeightKgToPounds(members.get(i).latestAssessment())).append(" lbs) ")
+                .append(members.get(i).getHeight()).append(" Metres ( ").append(convertHeightMetresToInches(members.get(i)))
+                .append(" inches).\n");
+            }
+        }
+        else{
+            return "There are currently no members in ths Gym.";
+        }
+        return list.toString();
     }
 
     @SuppressWarnings("unchecked")
