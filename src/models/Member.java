@@ -72,9 +72,8 @@ public abstract class Member extends Person {
 
     //Returns the assessments dates sorted in date order
     public SortedSet<Date> sortedAssessmentDates() {
-        SortedSet<Date> sortedAssessmentDates = new TreeSet<>(memberProgress.keySet());
-        sortedAssessmentDates.addAll(memberProgress.keySet());
-        return sortedAssessmentDates;
+         return new TreeSet<>(memberProgress.keySet());
+        
     }
 
     //The concrete implementation of this method will be completed in member subclasses

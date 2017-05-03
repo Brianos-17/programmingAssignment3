@@ -9,7 +9,7 @@ public class Trainer extends Person {
     public Trainer (String email, String name, String address, String gender, String speciality)
     {
         super(email, name, address, gender);
-        this.speciality = speciality;
+        setSpeciality(speciality);
     }
 
     //Mutator Method
