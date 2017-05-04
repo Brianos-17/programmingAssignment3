@@ -20,12 +20,13 @@ import java.util.ArrayList;
  * Created by Brian on 25/04/2017.
  */
 public class GymApi {
-    private ArrayList<Member> members;
+    public ArrayList<Member> members;
     private ArrayList<Trainer> trainers;
 
+    //Constructor for GymApi Class
     public GymApi() {
-        ArrayList<Member> members = new ArrayList<>();
-        ArrayList<Trainer> trainers = new ArrayList<>();
+        members = new ArrayList<>();
+        trainers = new ArrayList<>();
     }
 
     public void addMember(Member member) {
@@ -68,20 +69,6 @@ public class GymApi {
         }
     }
 
-    public Member searchMembersByEmail(String emailEntered) {
-        if (members.size() > 0) {
-            int i = 0;
-            while (i < members.size()) {
-                if (members.get(i).getEmail().equals(emailEntered)) {
-                    return members.get(i);
-                }
-                i++;
-            }
-            return null;
-        }
-        else
-            return null;
-    }
 
     public String searchMembersByName(String nameEntered) {
         if (members.size() > 0) {
@@ -96,15 +83,26 @@ public class GymApi {
         return "There are currently no members in the gym.";
     }
 
-    public Trainer searchTrainersByEmail(String emailEntered) {
-        int i = 0;
-        while (i < trainers.size()) {
-            if (trainers.get(i).getEmail().equals(emailEntered)) {
-                return trainers.get(i);
+    public Member searchMembersByEmail(String emailEntered) {
+            int i = 0;
+            while (i < members.size()) {
+                if (members.get(i).getEmail().equals(emailEntered)) {
+                    return members.get(i);
+                }
+                i++;
             }
-            i++;
-        }
-        return null;
+            return null;
+    }
+
+    public Trainer searchTrainersByEmail(String emailEntered) {
+            int i = 0;
+            while (i < trainers.size()) {
+                if (trainers.get(i).getEmail().equals(emailEntered)) {
+                    return trainers.get(i);
+                }
+                i++;
+            }
+            return null;
     }
 
     public String listMembers() {

@@ -18,7 +18,7 @@ public abstract class Member extends Person {
         setHeight(height);
         setStartingWeight(startingWeight);
         setChosenPackage(chosenPackage);
-        HashMap<Date, Assessment> memberProgress = new HashMap<>();
+        memberProgress = new HashMap<>();
     }
 
     //Accessor Methods
@@ -52,7 +52,10 @@ public abstract class Member extends Person {
     }
 
     public void setChosenPackage(String chosenPackage) {
-        this.chosenPackage = chosenPackage;
+        if ((chosenPackage.equals("Package 1")) || chosenPackage.equals("Package 2")
+                || chosenPackage.equals("Package 3") || chosenPackage.equals("WIT")) {
+            this.chosenPackage = chosenPackage;
+        }
     }
 
     public void setMemberProgress(Date date, Assessment assessment) {
@@ -73,7 +76,7 @@ public abstract class Member extends Person {
     //Returns the assessments dates sorted in date order
     public SortedSet<Date> sortedAssessmentDates() {
          return new TreeSet<>(memberProgress.keySet());
-        
+
     }
 
     //The concrete implementation of this method will be completed in member subclasses

@@ -7,6 +7,7 @@ import models.Member;
 import models.Assessment;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static utils.ScannerInput.*;
@@ -18,7 +19,8 @@ import static utils.ScannerInput.*;
 public class MenuController {
     private GymApi gym;
     private Scanner input;
-    private static String validEmail;
+    private static String email; //Allows members to view their profiles without having to search their own email again
+    private HashMap<String, String> chosenPackage;
 
     public static void main(String[] args) {
         new MenuController();
@@ -27,6 +29,15 @@ public class MenuController {
     private MenuController() {
         input = new Scanner(System.in);
         gym = new GymApi();
+        chosenPackage = new HashMap<>();
+        chosenPackage.put("Package 1", "\"Allowed access anytime to gym.\nFree access to all classes.\n" +
+                "\\nAccess to all changing areas including deluxe changing rooms.");
+        chosenPackage.put("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes." +
+                "\nAccess to all changing areas including deluxe changing rooms.");
+        chosenPackage.put("Package 3", "Allowed access to gym at off-peak times.\n€5 fee for all" +
+                "classes.\nNo access to deluxe changing rooms.");
+        chosenPackage.put("WIT", "\"Allowed access to gym during term time.\n€4 fee for all classes." +
+                "\nNo access to deluxe changing rooms.");
         welcomeMenu();
     }
 
@@ -37,8 +48,8 @@ public class MenuController {
         if (input.toUpperCase().equals("L")) {
             String memberOrTrainer = validNextString("Are you logging in as a Member or as a Trainer? [M/T]");
             if (memberOrTrainer.toUpperCase().equals("M")) {
-                validEmail = validNextString("Please enter your e-mail address: ");
-                if (gym.searchMembersByEmail(validEmail) != null) {
+                email = validNextString("Please enter your e-mail address: ");
+                if (gym.searchMembersByEmail(email) != null) {
                     System.out.println("Welcome! You have logged in successfully!");
                     runMemberMenu();
                 } else {
@@ -46,8 +57,8 @@ public class MenuController {
                     //Include code to exit system
                 }
             } else if (memberOrTrainer.toUpperCase().equals("T")) {
-                validEmail = validNextString("Please enter your e-mail address: ");
-                if (gym.searchTrainersByEmail(validEmail) != null) {
+                email = validNextString("Please enter your e-mail address: ");
+                if (gym.searchTrainersByEmail(email) != null) {
                     System.out.print("Welcome! You have logged in successfully!");
                     runTrainerMenu();
                 } else {
@@ -86,7 +97,7 @@ public class MenuController {
             switch (option) {
                 case 1:
                     System.out.println("Here is your current profile: ");
-                    System.out.println(gym.searchMembersByEmail(validEmail).toString());
+                    System.out.println(gym.searchMembersByEmail(email).toString());
                     break;
                 case 2:
                     register();//Cant update email. Will have to look at this.
@@ -334,10 +345,10 @@ public class MenuController {
         String input = validNextString("Would you like to register as a Premium Member or a Student Member? [P/S]");
         if ((input.toUpperCase().equals("P")) || (input.toUpperCase().equals("S"))) {
             System.out.println("Please enter your details: ");
-            validEmail = validNextString("Please enter your email: ");
-            while (gym.searchMembersByEmail(validEmail) != null) {
+            email = validNextString("Please enter your email: ");
+            while (gym.searchMembersByEmail(email) != null) {
                 System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
-                validEmail = validNextString("Please enter your email: ");
+                email = validNextString("Please enter your email: ");
             }
             String name = validNextString("Please enter your name: ");
             String address = validNextString("Please enter your address: ");
@@ -348,9 +359,9 @@ public class MenuController {
             if (input.toUpperCase().equals("S")) {
                 String studentId = validNextString("Please enter your Student ID: ");
                 String collegeName = validNextString("Please enter your College's Name: ");
-                gym.addMember(new StudentMember(validEmail, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
+                gym.addMember(new StudentMember(email, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
             } else if (input.toUpperCase().equals("P")) {
-                gym.addMember(new PremiumMember(validEmail, name, address, gender, height, startingWeight, chosenPackage));
+                gym.addMember(new PremiumMember(email, name, address, gender, height, startingWeight, chosenPackage));
             }
         } else{
             System.out.println("Invalid option. Please try again: ");
