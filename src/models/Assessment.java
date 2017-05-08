@@ -1,5 +1,6 @@
 package models;
 
+
 /**
  * Created by Brian on 24/04/2017.
  */
@@ -15,9 +16,7 @@ public class Assessment {
 
     public Assessment(double weight, double chest, double thigh, double upperArm, double waist, double hips,
                       String comment, Trainer trainer) {
-        if ((weight >= 35) && (weight <= 250)) {
-            this.weight = weight;
-        }
+        setWeight(weight);
         setChest(chest);
         setThigh(thigh);
         setUpperArm(upperArm);
@@ -29,7 +28,9 @@ public class Assessment {
 
     //Mutator Methods
     public void setWeight(double weight) {
+        if ((weight >= 35) && (weight <= 250)) {
         this.weight = weight;
+    }
     }
 
     public void setChest(double chest) {

@@ -70,7 +70,7 @@ public abstract class Member extends Person {
 
     //Returns the latest assessment based on last entry (by calendar date)
     public Assessment latestAssessment() {
-         return memberProgress.get(sortedAssessmentDates().last());
+        return memberProgress.get(sortedAssessmentDates().last());
     }
 
     //Returns the assessments dates sorted in date order

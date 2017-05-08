@@ -1,0 +1,70 @@
+<object-stream>
+  <list>
+    <models.PremiumMember>
+      <email>brianos-17@hotmail.com</email>
+      <name>Brian O&apos;Sullivan</name>
+      <address>11 Manor Drive</address>
+      <gender>M</gender>
+      <height>1.2</height>
+      <startingWeight>67.0</startingWeight>
+      <chosenPackage>Package 1</chosenPackage>
+      <memberProgress>
+        <entry>
+          <date>2017-05-04 13:57:31.147 UTC</date>
+          <models.Assessment>
+            <weight>72.0</weight>
+            <chest>1.0</chest>
+            <thigh>1.0</thigh>
+            <upperArm>1.0</upperArm>
+            <waist>1.0</waist>
+            <hips>1.0</hips>
+            <comment>Very Good</comment>
+          </models.Assessment>
+        </entry>
+        <entry>
+          <date>2017-05-04 13:57:05.671 UTC</date>
+          <models.Assessment>
+            <weight>69.0</weight>
+            <chest>1.0</chest>
+            <thigh>1.0</thigh>
+            <upperArm>1.0</upperArm>
+            <waist>1.0</waist>
+            <hips>1.0</hips>
+            <comment>Very Good</comment>
+          </models.Assessment>
+        </entry>
+        <entry>
+          <date>2017-05-04 13:57:47.116 UTC</date>
+          <models.Assessment>
+            <weight>77.0</weight>
+            <chest>1.0</chest>
+            <thigh>1.0</thigh>
+            <upperArm>1.0</upperArm>
+            <waist>1.0</waist>
+            <hips>1.0</hips>
+            <comment>1</comment>
+          </models.Assessment>
+        </entry>
+      </memberProgress>
+    </models.PremiumMember>
+    <models.PremiumMember>
+      <email>homer@simpson.com</email>
+      <name>Homer Simpson</name>
+      <address>Springfield</address>
+      <gender>M</gender>
+      <height>1.7</height>
+      <startingWeight>105.0</startingWeight>
+      <chosenPackage>Package 1</chosenPackage>
+      <memberProgress/>
+    </models.PremiumMember>
+  </list>
+  <list>
+    <models.Trainer>
+      <email>trainer1@email.com</email>
+      <name>trainer1</name>
+      <address>123 Street</address>
+      <gender>M</gender>
+      <speciality>Cardio</speciality>
+    </models.Trainer>
+  </list>
+</object-stream>

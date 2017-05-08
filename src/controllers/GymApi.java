@@ -106,11 +106,15 @@ public class GymApi {
     }
 
     public String listMembers() {
-        String list = "";
-        for (int i = 0; i <= members.size(); i++) {
-            list = list + members.get(i).toString();
+        if (members.size() > 0) {
+            String list = "";
+            for (int i = 0; i <= members.size(); i++) {
+                list = list + members.get(i).toString();
+            }
+            return list;
         }
-        return list;
+        else
+            return "There are currently no members in this gym.";
     }
 
 
