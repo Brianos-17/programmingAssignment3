@@ -63,9 +63,9 @@ public abstract class Member extends Person {
     }
 
     public String toString() {
-        return super.toString() + "Height(in metres): " + height
-                + "Starting Weight(in kgs): " + startingWeight
-                + "Chosen Package: " + chosenPackage;
+        return super.toString() + "\nHeight(in metres): " + height
+                + "\nStarting Weight(in kgs): " + startingWeight
+                + "\nChosen Package: " + chosenPackage;
     }
 
     //Returns the latest assessment based on last entry (by calendar date)

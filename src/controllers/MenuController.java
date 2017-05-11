@@ -9,6 +9,8 @@ import models.Assessment;
 
 import java.util.*;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static utils.ScannerInput.*;
 
@@ -74,7 +76,7 @@ public class MenuController {
                 } else if (memberOrTrainer.toUpperCase().equals("T")) {
                     email = validNextString("Please enter your e-mail address: ");
                     if (gym.searchTrainersByEmail(email) != null) {
-                        System.out.print("Welcome! You have logged in successfully!");
+                        System.out.print("Welcome! You have logged in successfully!\n");
                         runTrainerMenu();
                     } else {
                         System.out.println("There is no Trainer registered to this email. Access Denied.");
@@ -101,75 +103,10 @@ public class MenuController {
                     System.out.println(gym.searchMembersByEmail(email).toString());
                     break;
                 case 2:
-                    registerMember();//Cant update email. Will have to look at this.
-                    //use gym.searchMembersByEmail(email) and then all the setters in necessary class
+                    update();
                     break;
                 case 3:
-                    int memberSubMenu = memberSubMenu();
-                    while (memberSubMenu != 0) {
-                        Map memberProgress = gym.searchMembersByEmail(email).getMemberProgress();
-                        Map<Date, Assessment> newMap = new TreeMap<>(memberProgress);
-                        Iterator<Map.Entry<Date, Assessment>> entries = newMap.entrySet().iterator();
-                        switch (memberSubMenu) {
-                            case 1:
-                                System.out.println("Here is a view of your progress by weight: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tWeight: " + entry.getValue().getWeight() + "Kg's");
-                                }
-                                break;
-
-                            case 2:
-                                System.out.println("Here is a view of your progress by chest measurement: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tChest: " + entry.getValue().getChest() + "cm's");
-                                }
-                                break;
-
-                            case 3:
-                                System.out.println("Here is a view of your progress by thigh measurement: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tThigh: " + entry.getValue().getThigh() + "cm's");
-                                }
-                                break;
-
-                            case 4:
-                                System.out.println("Here is a view of your progress by upper arm measurement: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getUpperArm() + "cm's");
-                                }
-                                break;
-
-                            case 5:
-                                System.out.println("Here is a view of your progress by waist measurement: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getWaist() + "cm's");
-                                }
-                                break;
-
-                            case 6:
-                                System.out.println("Here is a view of your progress by hips measurement: ");
-                                while (entries.hasNext()) {
-                                    Map.Entry<Date, Assessment> entry = entries.next();
-                                    System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getHips() + "cm's");
-                                }
-                                break;
-
-                            default:
-                                System.out.println("Invalid option entered. Please try again.");
-                                break;
-                        }
-                        System.out.println("\nPress any key to continue: ");
-                        input.nextLine();
-                        input.nextLine();
-                        memberSubMenu = memberSubMenu();
-
-                    }
-                    runMemberMenu();
+                    progressReport(email);
                     break;
                 default:
                     System.out.println("Invalid option entered. Please try again.");
@@ -203,11 +140,11 @@ public class MenuController {
                     break;
                 case 3:
                     String emailSearch = validNextString("Please enter the email you wish to search by: ");
-                    gym.searchMembersByEmail(emailSearch);
+                    System.out.println(gym.searchMembersByEmail(emailSearch));
                     break;
                 case 4:
                     String nameSearch = validNextString("Please enter the name you wish to search by: ");
-                    gym.searchMembersByName(nameSearch);
+                    System.out.println(gym.searchMembersByName(nameSearch));
                     break;
                 case 5: //List members with an ideal body weight
                     gym.listMembersWithIdealWeight();
@@ -257,7 +194,10 @@ public class MenuController {
                                 System.out.println(commentMember.getName());
                                 String check = validNextString("Is this the correct Member? [Y/N]");
                                 if (check.toUpperCase().equals("Y")) {
-                                    commentMember.getMemberProgress();
+                                    System.out.println("Current comment: " + commentMember.latestAssessment().getComment());
+                                    String newComment = validNextString("Please enter your updated comment: ");
+                                    commentMember.latestAssessment().setComment(newComment);
+                                    System.out.println("Trainers comment has been updated.");
                                 }
                                 break;
                             default:
@@ -278,13 +218,26 @@ public class MenuController {
                             case 1: //Specific member progress (via email search)
                                 String reportEmail = validNextString("Please enter the email of the of the member you are looking for: ");
                                 gym.searchMembersByEmail(reportEmail).getMemberProgress();
+                                String input = validNextString("You have selected " + gym.searchMembersByEmail(reportEmail).getName() + "\nIs this the correct member? [Y/N]");
+                                if (input.toUpperCase().equals("Y")) {
+                                    progressReport(reportEmail);
+                                }
                                 break;
                             case 2: //Specific member progress (via name search)
                                 String reportName = validNextString("Please enter the name of the member you are looking for: ");
-                                gym.searchMembersByName(reportName);
-                                //Need to finish this method!!!
+                                String search = gym.searchMembersByName(reportName);
+                                System.out.println(search);
+                                String check = validNextString("Is this the correct Member? [Y/N]");
+                                if (check.toUpperCase().equals("Y")) {
+                                    Pattern p = Pattern.compile("[A-Z0-9.%+-]+@[A-Z0-9.-]+\\.[A-Z0-9-.]{2,4}", Pattern.CASE_INSENSITIVE);
+                                    Matcher emailMatch = p.matcher(search);
+                                    while (emailMatch.find()) {
+                                        System.out.println(emailMatch.group());
+                                        progressReport(emailMatch.group());
+                                    }
+                                }
                                 break;
-                            case 3:// Need more clarification here!!!!
+                            case 3:
                                 break;
                             default:
                                 System.out.println("Invalid option entered. Please try again.");
@@ -432,6 +385,116 @@ public class MenuController {
             }
         } else {
             System.out.println("Invalid option. Please try again: ");
+        }
+    }
+
+    private void update() {
+        Member currentMember = gym.searchMembersByEmail(email);
+        String a = validNextString("Would you like to update your email address? [Y/N]");
+        if (a.toUpperCase().equals("Y")) {
+            String updateEmail = validNextString("Please enter your new email: ");
+            currentMember.setEmail(updateEmail);
+        }
+        String b = validNextString("Would you like to update your name? [Y/N]");
+        if (b.toUpperCase().equals("Y")) {
+            String updateName = validNextString("Please enter your new name: ");
+            currentMember.setName(updateName);
+        }
+        String c = validNextString("Would you like to update your address? [Y/N]");
+        if (c.toUpperCase().equals("Y")) {
+            String updateAddress = validNextString("Please enter your new address: ");
+            currentMember.setAddress(updateAddress);
+        }
+        String d = validNextString("Would you like to update your gender? [Y/N]");
+        if (d.toUpperCase().equals("Y")) {
+            String updateGender = validNextString("Please enter your gender: [M/F]");
+            if (updateGender.toUpperCase().equals("M")) {
+                updateGender = "M";
+            } else {
+                updateGender = "F";
+            }
+            currentMember.setGender(updateGender);
+        }
+        String e = validNextString("Would you like to update your height? [Y/N]");
+        if (e.toUpperCase().equals("Y")) {
+            double updateHeight = validNextDouble("Please enter your new height(in metres): ");
+            currentMember.setHeight(updateHeight);
+        }
+        String f = validNextString("Would you like to update your starting weight? [Y/N]");
+        if (f.toUpperCase().equals("Y")) {
+            double updateStartingWeight = validNextDouble("Please enter your new starting weight(in Kgs): ");
+            currentMember.setStartingWeight(updateStartingWeight);
+        }
+        String g = validNextString("Would you like to update your chosen package? [Y/N]");
+        if (g.toUpperCase().equals("Y")) {
+            String updateChosenPackage = validNextString("Please enter your updated package: ");
+            currentMember.setChosenPackage(updateChosenPackage);
+        }
+    }
+
+    private void progressReport(String email) {
+        int memberSubMenu = memberSubMenu();
+        while (memberSubMenu != 0) {
+            Map memberProgress = gym.searchMembersByEmail(email).getMemberProgress();
+            Map<Date, Assessment> newMap = new TreeMap<>(memberProgress);
+            Iterator<Map.Entry<Date, Assessment>> entries = newMap.entrySet().iterator();
+            switch (memberSubMenu) {
+                case 1:
+                    System.out.println("Here is a view of your progress by weight: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tWeight: " + entry.getValue().getWeight() + "Kg's");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("Here is a view of your progress by chest measurement: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tChest: " + entry.getValue().getChest() + "cm's");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Here is a view of your progress by thigh measurement: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tThigh: " + entry.getValue().getThigh() + "cm's");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Here is a view of your progress by upper arm measurement: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getUpperArm() + "cm's");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Here is a view of your progress by waist measurement: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getWaist() + "cm's");
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("Here is a view of your progress by hips measurement: ");
+                    while (entries.hasNext()) {
+                        Map.Entry<Date, Assessment> entry = entries.next();
+                        System.out.println("Date: " + entry.getKey() + "\tUpper Arm: " + entry.getValue().getHips() + "cm's");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid option entered. Please try again.");
+                    break;
+            }
+            System.out.println("\nPress any key to continue: ");
+            input.nextLine();
+            input.nextLine();
+            memberSubMenu = memberSubMenu();
         }
     }
 

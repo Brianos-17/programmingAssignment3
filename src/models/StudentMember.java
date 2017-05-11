@@ -40,7 +40,7 @@ public class StudentMember extends Member {
     }
 
     public String toString(){
-        return super.toString() + "Student ID: " + studentId
-                + "College Name: " + collegeName;
+        return super.toString() + "\nStudent ID: " + studentId
+                + "\nCollege Name: " + collegeName;
     }
 }

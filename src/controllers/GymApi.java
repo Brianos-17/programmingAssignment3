@@ -72,12 +72,15 @@ public class GymApi {
 
     public String searchMembersByName(String nameEntered) {
         if (members.size() > 0) {
-            for (int i = 0; i < members.size(); i++) {
+            int i = 0;
+            while (i < members.size()) {
                 if (members.get(i).getName().contains(nameEntered)) {
                     return members.get(i).toString();
-                } else {
-                    return "There are no members in the gym matching your search. Please try again.";
                 }
+                i++;
+            }
+            if (members.get(i).toString().equals("")) {
+                return "There are no members in the gym matching your description. ";
             }
         }
         return "There are currently no members in the gym.";

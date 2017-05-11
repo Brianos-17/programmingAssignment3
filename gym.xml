@@ -1,70 +1,63 @@
 <object-stream>
   <list>
-    <models.PremiumMember>
+    <models.StudentMember>
       <email>brianos-17@hotmail.com</email>
       <name>Brian O&apos;Sullivan</name>
-      <address>11 Manor Drive</address>
+      <address>Caher Lodge Caherbreagh Tralee Co.Kerry</address>
       <gender>M</gender>
-      <height>1.2</height>
-      <startingWeight>67.0</startingWeight>
+      <height>1.9</height>
+      <startingWeight>79.0</startingWeight>
       <chosenPackage>Package 1</chosenPackage>
       <memberProgress>
         <entry>
-          <date>2017-05-04 13:57:31.147 UTC</date>
+          <date>2017-05-11 11:06:35.909 UTC</date>
           <models.Assessment>
-            <weight>72.0</weight>
-            <chest>1.0</chest>
-            <thigh>1.0</thigh>
-            <upperArm>1.0</upperArm>
-            <waist>1.0</waist>
-            <hips>1.0</hips>
+            <weight>78.0</weight>
+            <chest>45.0</chest>
+            <thigh>45.0</thigh>
+            <upperArm>45.0</upperArm>
+            <waist>45.0</waist>
+            <hips>45.0</hips>
             <comment>Very Good</comment>
-          </models.Assessment>
-        </entry>
-        <entry>
-          <date>2017-05-04 13:57:05.671 UTC</date>
-          <models.Assessment>
-            <weight>69.0</weight>
-            <chest>1.0</chest>
-            <thigh>1.0</thigh>
-            <upperArm>1.0</upperArm>
-            <waist>1.0</waist>
-            <hips>1.0</hips>
-            <comment>Very Good</comment>
-          </models.Assessment>
-        </entry>
-        <entry>
-          <date>2017-05-04 13:57:47.116 UTC</date>
-          <models.Assessment>
-            <weight>77.0</weight>
-            <chest>1.0</chest>
-            <thigh>1.0</thigh>
-            <upperArm>1.0</upperArm>
-            <waist>1.0</waist>
-            <hips>1.0</hips>
-            <comment>1</comment>
           </models.Assessment>
         </entry>
       </memberProgress>
-    </models.PremiumMember>
-    <models.PremiumMember>
-      <email>homer@simpson.com</email>
-      <name>Homer Simpson</name>
-      <address>Springfield</address>
+      <studentId>200700678</studentId>
+      <collegeName>WIT</collegeName>
+    </models.StudentMember>
+    <models.StudentMember>
+      <email>lukemyers-17@hotmail.com</email>
+      <name>Luke Myers</name>
+      <address>Calder 5 Brownes Road Waterford Co. Waterford</address>
       <gender>M</gender>
       <height>1.7</height>
-      <startingWeight>105.0</startingWeight>
+      <startingWeight>75.0</startingWeight>
       <chosenPackage>Package 1</chosenPackage>
-      <memberProgress/>
-    </models.PremiumMember>
+      <memberProgress>
+        <entry>
+          <date>2017-05-11 11:07:04.384 UTC</date>
+          <models.Assessment>
+            <weight>80.0</weight>
+            <chest>45.0</chest>
+            <thigh>45.0</thigh>
+            <upperArm>45.0</upperArm>
+            <waist>45.0</waist>
+            <hips>45.0</hips>
+            <comment>Very Good</comment>
+          </models.Assessment>
+        </entry>
+      </memberProgress>
+      <studentId>8753</studentId>
+      <collegeName>WIT</collegeName>
+    </models.StudentMember>
   </list>
   <list>
     <models.Trainer>
       <email>trainer1@email.com</email>
-      <name>trainer1</name>
+      <name>Trainer_1</name>
       <address>123 Street</address>
       <gender>M</gender>
-      <speciality>Cardio</speciality>
+      <speciality>Strength</speciality>
     </models.Trainer>
   </list>
 </object-stream>
