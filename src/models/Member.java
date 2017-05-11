@@ -52,10 +52,7 @@ public abstract class Member extends Person {
     }
 
     public void setChosenPackage(String chosenPackage) {
-        if ((chosenPackage.equals("Package 1")) || chosenPackage.equals("Package 2")
-                || chosenPackage.equals("Package 3") || chosenPackage.equals("WIT")) {
             this.chosenPackage = chosenPackage;
-        }
     }
 
     public void setMemberProgress(Date date, Assessment assessment) {

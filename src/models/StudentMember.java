@@ -11,14 +11,19 @@ public class StudentMember extends Member {
     private String collegeName;
 
     public StudentMember(String email, String name, String address, String gender,
-                         double height, double startingWeight, String chosenPackage,  String studentId, String collegeName) {
-        super( email, name, address, gender, height, startingWeight, chosenPackage);
+                         double height, double startingWeight, String chosenPackage, String studentId, String collegeName) {
+        super(email, name, address, gender, height, startingWeight, chosenPackage);
         setStudentId(studentId);
         setCollegeName(collegeName);
+        chosenPackage(chosenPackage);
     }
 
     public void chosenPackage(String packageChoice) {
-        getChosenPackage();
+        if (getCollegeName().toUpperCase().equals("WIT")) {
+            setChosenPackage("WIT");
+        }
+        else
+            setChosenPackage("Package 3");
     }
 
     //Accessor Methods
@@ -39,7 +44,7 @@ public class StudentMember extends Member {
         this.collegeName = collegeName;
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + "\nStudent ID: " + studentId
                 + "\nCollege Name: " + collegeName;
     }

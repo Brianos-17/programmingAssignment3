@@ -1,11 +1,9 @@
 package controllers;
 
-
 import models.*;
 import models.Trainer;
 import models.Member;
 import models.Assessment;
-
 
 import java.util.*;
 import java.util.Date;

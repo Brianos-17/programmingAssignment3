@@ -61,9 +61,9 @@ public abstract class Person {
     }
 
     public void setGender(String gender) {
-        if ((gender.toLowerCase().equals("male")) || (gender.toLowerCase().equals("m"))) {
+        if ((gender.toUpperCase().equals("MALE")) || (gender.toUpperCase().equals("M"))) {
             this.gender = "M";
-        } else if (gender.toLowerCase().equals("female") || (gender.toLowerCase().equals("f"))) {
+        } else if (gender.toUpperCase().equals("FEMALE") || (gender.toUpperCase().equals("F"))) {
             this.gender = "F";
         } else {
             this.gender = "Unspecified";

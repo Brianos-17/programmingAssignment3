@@ -3,7 +3,6 @@ package models;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -29,7 +28,7 @@ public class TrainerTest {
         assertThat(normalTrainer1.getSpeciality(), is("Cardio"));
         assertThat(normalTrainer2.getSpeciality(), is("Strength"));
         assertThat(invalidTrainer1.getSpeciality().equals("Legs"), is(false));
-        assertThat(invalidTrainer2.getSpeciality().equals("Weights"), is(false));
+        assertThat(invalidTrainer2.getSpeciality().equals("Test"), is(false));
     }
 
     @Test
@@ -93,13 +92,13 @@ public class TrainerTest {
         assertThat(normalTrainer1.getGender(), is("M"));
         normalTrainer1.setGender("Female");
         assertThat(normalTrainer1.getGender(), is("F"));
-        normalTrainer1.setGender("Male)");
+        normalTrainer1.setGender("Male");
         assertThat(normalTrainer1.getGender(), is("M"));
         assertThat(normalTrainer2.getGender(), is("F"));
         normalTrainer2.setGender("Incorrect");
         assertThat(normalTrainer2.getGender(), is("Unspecified"));
         normalTrainer2.setGender("m");
-        assertThat(normalTrainer2.getGender(), is("M)"));
+        assertThat(normalTrainer2.getGender(), is("M"));
         normalTrainer2.setGender("f");
         assertThat(normalTrainer2.getGender(), is("F"));
     }
