@@ -183,7 +183,7 @@ public class MenuController {
                                     Assessment assessment = new Assessment(weight, chest, thigh, upperArm, waist, hips, comment, trainer);
                                     Date date = new Date();
                                     assessedMember.setMemberProgress(date, assessment);
-                                    System.out.println("New assessment has been added.");
+                                    System.out.println("New assessment has been added.\n");
                                 }
                                 break;
                             case 2:
@@ -265,7 +265,6 @@ public class MenuController {
         }
         System.exit(0);
     }
-
 
     private int memberMenu() {
         System.out.println("Welcome to your Member menu!");

@@ -15,7 +15,7 @@ public class PremiumMemberTest {
 
     @Before
     public void set() throws Exception {
-        normalPremiumMember1 = new PremiumMember("email1@email.com", "Tony Stark", "Avengers Tower, New York, America", "Male", 1.8, 76, "Package 1" );
+        normalPremiumMember1 = new PremiumMember("email1@email.com", "Tony Stark", "Avengers Tower, New York, America", "Male", 1.8, 76, "Package 1");
         normalPremiumMember2 = new PremiumMember("email2@email.com", "Black Widow", "52 Boradway, New York, America", "Female", 1.5, 67, "Package 2");
     }
 

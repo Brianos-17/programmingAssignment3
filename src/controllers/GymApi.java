@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class GymApi {
     public ArrayList<Member> members;
-    private ArrayList<Trainer> trainers;
+    public ArrayList<Trainer> trainers;
 
     //Constructor for GymApi Class
     public GymApi() {
@@ -71,22 +71,26 @@ public class GymApi {
 
 
     public String searchMembersByName(String nameEntered) {
+        String list = "";
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
                 if (members.get(i).getName().contains(nameEntered)) {
-                    return members.get(i).toString();
+                    list += members.get(i).toString() + "\n";
                 }
                 i++;
             }
-            if (members.get(i).toString().equals("")) {
-                return "There are no members in the gym matching your description. ";
-            }
+            if (list.equals("")) {
+                return "There are no members in the gym matching your description.";
+            } else
+                return list;
         }
         return "There are currently no members in the gym.";
     }
 
+
     public Member searchMembersByEmail(String emailEntered) {
+        if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
                 if (members.get(i).getEmail().equals(emailEntered)) {
@@ -95,82 +99,84 @@ public class GymApi {
                 i++;
             }
             return null;
+        }
+        return null;
     }
 
     public Trainer searchTrainersByEmail(String emailEntered) {
-            int i = 0;
-            while (i < trainers.size()) {
-                if (trainers.get(i).getEmail().equals(emailEntered)) {
-                    return trainers.get(i);
-                }
-                i++;
+        int i = 0;
+        while (i < trainers.size()) {
+            if (trainers.get(i).getEmail().equals(emailEntered)) {
+                return trainers.get(i);
             }
-            return null;
+            i++;
+        }
+        return null;
     }
 
     public String listMembers() {
         if (members.size() > 0) {
             String list = "";
-            for (int i = 0; i <= members.size(); i++) {
-                list = list + members.get(i).toString();
+            for (int i = 0; i < members.size(); i++) {
+                list = list + members.get(i).toString() + "\n";
             }
             return list;
-        }
-        else
+        } else
             return "There are currently no members in this gym.";
     }
 
 
     public String listMembersWithIdealWeight() {
-        StringBuilder list = new StringBuilder();
+        String list = "";
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
                 if (isIdealBodyWeight(members.get(i), members.get(i).latestAssessment())) {
-                    list.append(members.get(i));
-                } else {
-                    return "There are no members in the gym with an Ideal Body Weight.";
+                    list += members.get(i) + "\n";
                 }
                 i++;
             }
-        } else {
+            if (list.equals("")) {
+                return "There are no members in the gym with an Ideal Body Weight.";
+            } else
+                return "The following members have an Ideal Body Weight: \n" + list;
+        } else
             return "There are currently no members in the Gym.";
-        }
-        return "The following members have an Ideal Body Weight: " + list.toString();
+
     }
 
     public String listMembersBySpecificBMICategory(String category) {
-        StringBuilder list = new StringBuilder();
+        String list = "";
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
                 if (determineBMICategory(
                         calculateBMI(members.get(i), members.get(i).latestAssessment())).equals(category)) {
-                    list.append(members.get(i));
-                } else {
-                    return "There are no members in the gym matching this category.";
+                    list += members.get(i) + "\n";
                 }
+                i++;
             }
-        } else {
-            return "There are currently no members in the Gym.";
+            if (list.equals("")) {
+                return "There are no members in the gym matching this category.";
+            } else
+                return list;
         }
-        return list.toString();
+        return "There are currently no members in the Gym.";
     }
 
     public String listMemberDetailsImperialAndMetric() {
-        StringBuilder list = new StringBuilder();
+        String list = "";
         if (members.size() > 0) {
             int i = 0;
             while (i < members.size()) {
-                list.append(members.get(i).getName()).append(": ").append(members.get(i).latestAssessment().getWeight())
-                        .append(" KGs ( ").append(convertWeightKgToPounds(members.get(i).latestAssessment())).append(" lbs) ")
-                        .append(members.get(i).getHeight()).append(" Metres ( ").append(convertHeightMetresToInches(members.get(i)))
-                        .append(" inches).\n");
+                list += members.get(i).getName() + ": " + members.get(i).latestAssessment().getWeight() + "KGs (" + convertWeightKgToPounds(members.get(i).latestAssessment()) + "lbs) "
+                        + members.get(i).getHeight() + " Metres (" + convertHeightMetresToInches(members.get(i)) + " inches).\n";
+
+                i++;
             }
-        } else {
+            return list;
+        } else
             return "There are currently no members in ths Gym.";
-        }
-        return list.toString();
     }
 
     @SuppressWarnings("unchecked")
