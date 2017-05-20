@@ -12,9 +12,11 @@ import java.util.regex.Pattern;
 
 import static utils.ScannerInput.*;
 
-
 /**
  * Created by Brian on 26/04/2017.
+ * @author Brian O'Sullivan
+ *
+ * MenuController Class. Allows users to sign up, log in and interact with the gym app
  */
 public class MenuController {
     private GymApi gym;
@@ -23,10 +25,20 @@ public class MenuController {
     private HashMap<String, String> chosenPackage;
     private boolean membersInGym;
 
+    /**
+     * Default main method which kicks of when the program is launched. Runs the MenuController constructor
+     * @param args String[]
+     */
     public static void main(String[] args) {
         new MenuController();
     }
 
+    /**
+     * Constructor for class MenuController. Creates an instance of this class.
+     * Creates new Scanner, GymApi, and pre-loads the chosenPackage HashMap.
+     * Checks if there are currently any members already to prevent login option if there are no accounts
+     * Runs the welcome menu
+     */
     private MenuController() {
         input = new Scanner(System.in);
         gym = new GymApi();
@@ -43,12 +55,23 @@ public class MenuController {
         welcomeMenu();
     }
 
+    /**
+     * Method to check whether there are already members in the gym.
+     * If so the membersInGym boolean is set to true and the welcome menu will give both the options login and register
+     * Otherwise only the register option is given
+     */
     private void membersInGym() {
         if (gym.members.size() > 0) {
             membersInGym = true;
         }
     }
 
+    /**
+     * The welcomeMenu method loads any existing data and then asks the user to either log in or register a new account.
+     * If a users chooses to register they are taken to a different method.
+     * There are seperate log in paths for members and trainers leading to different sub menus.
+     * If a user fails their log in authentication the system will automatically exit
+     */
     private void welcomeMenu() {
         try {
             gym.load();
@@ -92,6 +115,102 @@ public class MenuController {
         }
     }
 
+    /**
+     * Method which prints out the options available to the user while running the member menu
+     * @return int representing the option the user whishes to use in the runMemberMenu method
+     */
+    private int memberMenu() {
+        System.out.println("Welcome to your Member menu!");
+        System.out.println("---------------");
+        System.out.println("1) View your profile");
+        System.out.println("2) Update your profile");
+        System.out.println("3) View your progress");
+        System.out.println("---------------");
+        System.out.println("0) Exit");
+        int option = validNextInt("==>");
+        return option;
+    }
+
+    /**
+     * Method which prints out the options available to the user while running the sub section of the member menu
+     * @return int representing the option the user wishes to carry out
+     */
+    private int memberSubMenu() {
+        System.out.println("Welcome to your progress menu!");
+        System.out.println("---------------");
+        System.out.println("   -- 1) View progress by weight");
+        System.out.println("   -- 2) View progress by chest measurement");
+        System.out.println("   -- 3) View progress by thigh measurement");
+        System.out.println("   -- 4) View progress by upper arm measurement");
+        System.out.println("   -- 5) View progress by waist measurement");
+        System.out.println("   -- 6) View progress by hips measurement");
+        System.out.println("   -----------------)");
+        System.out.println("   -- 0) Exit to main menu");
+        System.out.println("   -----------------)");
+        System.out.println("x) Exit");
+        int option = validNextInt("==>");
+        return option;
+    }
+
+    /**
+     * Method which prints out the options available to the user while running the runTrainerMenu method
+     * @return int representing the option the users wishes to carry out
+     */
+    private int trainerMenu() {
+        System.out.println("Welcome to your Trainer menu!");
+        System.out.println("---------------");
+        System.out.println("1) Add a new member");
+        System.out.println("2) List all members");
+        System.out.println("3) Search for member by email");
+        System.out.println("4) Search for member by name");
+        System.out.println("5) List members with an ideal body weight");
+        System.out.println("6) List members by a specific BMI category");
+        System.out.println("---------------");
+        System.out.println("7) Assessments");
+        System.out.println("8) Reports");
+        System.out.println("---------------");
+        System.out.println("0) Exit");
+        int option = validNextInt("==>");
+        return option;
+    }
+
+    /**
+     * Method which prints out the options available to the user in the assessment sub menu of the trainer menu
+     * @return int representing the option the user wishes to carry out
+     */
+    private int assessmentSubMenu() {
+        System.out.println("Welcome to the Assessments menu!");
+        System.out.println("");
+        System.out.println("   -- 1) Add a new assessment for a member");
+        System.out.println("   -- 2) Update a comment on a members assessment");
+        System.out.println("   -----------------)");
+        System.out.println("   -- 0) Exit to main menu");
+        System.out.println("   -----------------)");
+        int assessmentOption = validNextInt("==>");
+        return assessmentOption;
+    }
+
+    /**
+     * Method which prints out the options available in the report sub menu of the trainer menu
+     * @return int representing the option the user wishes to carry out
+     */
+    private int reportSubMenu() {
+        System.out.println("Welcome to the Reports menu!");
+        System.out.println("   -- 1) Search for member progress via email");
+        System.out.println("   -- 2) Search for member progress via name");
+        System.out.println("   -- 3) Show overall member progress");
+        System.out.println("   -----------------)");
+        System.out.println("   -- 0) Exit to main menu");
+        int reportOption = validNextInt("==>");
+        return reportOption;
+    }
+
+    /**
+     * Method which runs the member menu. Switch statements allow users to cycle through all options choosing which ones
+     * they want to carry out.
+     * Leads to a series of other methods depending on the option chosen by the user
+     * 0 will exit the system and save the data, or bring the user out of sub menus
+     */
     private void runMemberMenu() {
         int option = memberMenu();
         while (option != 0) {
@@ -118,6 +237,7 @@ public class MenuController {
         System.out.println("Exiting the program. Goodbye...");
         try {
             gym.store();
+            gym.JSONstore();
             System.out.println("Saving gym details...");
         } catch (Exception e) {
             System.err.println("Error writing to fle: " + e);
@@ -125,7 +245,12 @@ public class MenuController {
         System.exit(0);
     }
 
-
+    /**
+     * Method which runs the trainer menu and its associated sub menus: assessment and report
+     * Switch statement allows the users to cycle through and select whatever option they wish. This method leads to a series
+     * of other methods in the the MenuController and other classes
+     * 0 will exit the system and save the data, or bring users out of the sub menu they are currently in
+     */
     private void runTrainerMenu() {
         int option = trainerMenu();
         while (option != 0) {
@@ -259,6 +384,7 @@ public class MenuController {
         System.out.println("Exiting the program. Goodbye...");
         try {
             gym.store();
+            gym.JSONstore();
             System.out.println("Saving gym details...");
         } catch (Exception e) {
             System.err.println("Error writing to fle: " + e);
@@ -266,76 +392,12 @@ public class MenuController {
         System.exit(0);
     }
 
-    private int memberMenu() {
-        System.out.println("Welcome to your Member menu!");
-        System.out.println("---------------");
-        System.out.println("1) View your profile");
-        System.out.println("2) Update your profile");
-        System.out.println("3) View your progress");
-        System.out.println("---------------");
-        System.out.println("0) Exit");
-        int option = validNextInt("==>");
-        return option;
-    }
-
-    private int memberSubMenu() {
-        System.out.println("Welcome to your progress menu!");
-        System.out.println("---------------");
-        System.out.println("   -- 1) View progress by weight");
-        System.out.println("   -- 2) View progress by chest measurement");
-        System.out.println("   -- 3) View progress by thigh measurement");
-        System.out.println("   -- 4) View progress by upper arm measurement");
-        System.out.println("   -- 5) View progress by waist measurement");
-        System.out.println("   -- 6) View progress by hips measurement");
-        System.out.println("   -----------------)");
-        System.out.println("   -- 0) Exit to main menu");
-        System.out.println("   -----------------)");
-        System.out.println("x) Exit");
-        int option = validNextInt("==>");
-        return option;
-    }
-
-    private int trainerMenu() {
-        System.out.println("Welcome to your Trainer menu!");
-        System.out.println("---------------");
-        System.out.println("1) Add a new member");
-        System.out.println("2) List all members");
-        System.out.println("3) Search for member by email");
-        System.out.println("4) Search for member by name");
-        System.out.println("5) List members with an ideal body weight");
-        System.out.println("6) List members by a specific BMI category");
-        System.out.println("---------------");
-        System.out.println("7) Assessments");
-        System.out.println("8) Reports");
-        System.out.println("---------------");
-        System.out.println("0) Exit");
-        int option = validNextInt("==>");
-        return option;
-    }
-
-    private int assessmentSubMenu() {
-        System.out.println("Welcome to the Assessments menu!");
-        System.out.println("");
-        System.out.println("   -- 1) Add a new assessment for a member");
-        System.out.println("   -- 2) Update a comment on a members assessment");
-        System.out.println("   -----------------)");
-        System.out.println("   -- 0) Exit to main menu");
-        System.out.println("   -----------------)");
-        int assessmentOption = validNextInt("==>");
-        return assessmentOption;
-    }
-
-    private int reportSubMenu() {
-        System.out.println("Welcome to the Reports menu!");
-        System.out.println("   -- 1) Search for member progress via email");
-        System.out.println("   -- 2) Search for member progress via name");
-        System.out.println("   -- 3) Show overall member progress");
-        System.out.println("   -----------------)");
-        System.out.println("   -- 0) Exit to main menu");
-        int reportOption = validNextInt("==>");
-        return reportOption;
-    }
-
+    /**
+     * Method to allow new users to register as either a member or a trainer.
+     * Users choosing to register as a member are re-directed to the registerMember method. Trainers are registered and add to the
+     * trainers arraylist.
+     * After registration users are brought to the appropriate menu
+     */
     private void register() {
         String memberOrTrainer = validNextString("Would you like to register as a Member or as a Trainer? [M/T]");
 
@@ -358,6 +420,10 @@ public class MenuController {
         }
     }
 
+    /**
+     * Method to allow users to register as a member. Different options are given to register as either one of the two Member subclasses.
+     * Once valid data has been entered the members are added to the members ArrayList and brought to the members menu
+     */
     private void registerMember() {
         String input = validNextString("Would you like to register as a Premium Member or a Student Member? [P/S]");
         if ((input.toUpperCase().equals("P")) || (input.toUpperCase().equals("S"))) {
@@ -385,6 +451,10 @@ public class MenuController {
         }
     }
 
+    /**
+     * Method to allow members update their profile.
+     * They are asked if they want to change each field, and validation checks are preformed to ensure correct data is entered
+     */
     private void update() {
         Member currentMember = gym.searchMembersByEmail(email);
         String a = validNextString("Would you like to update your email address? [Y/N]");
@@ -429,6 +499,11 @@ public class MenuController {
         }
     }
 
+    /**
+     * Method which allows a user to look up the progress of a specific member based on their email address.
+     * Returns a list in reverse chronological order of the dates and the specific measurement the user has requested
+     * @param email String representing the email for a specific member
+     */
     private void progressReport(String email) {
         int memberSubMenu = memberSubMenu();
         while (memberSubMenu != 0) {
@@ -494,5 +569,4 @@ public class MenuController {
             memberSubMenu = memberSubMenu();
         }
     }
-
 }
