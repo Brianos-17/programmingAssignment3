@@ -8,12 +8,19 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 11/05/2017.
+ * @author Brian O'Sullivan
+ *
+ * StudentMember Test class. Performs junit testing on methods in the StudentMember class
  */
 public class StudentMemberTest {
     private StudentMember normalStudentMember1;
     private StudentMember normalStudentMember2;
     private StudentMember normalStudentMember3;
 
+    /**
+     * Creates new instances of model classes in order to perform junit tests of StudentMember class methods
+     * @throws Exception if test fails
+     */
     @Before
     public void setUp() throws Exception {
         normalStudentMember1 = new StudentMember("student1@email.com", "Genji", "54 Fake Street, Waterford, Co.Waterford", "M", 2.1, 84.6, "WIT", "1234567", "WIT");
@@ -21,6 +28,10 @@ public class StudentMemberTest {
         normalStudentMember3 = new StudentMember("student3@email.com", "Symmetra", "321 Main Street, waterford", "Female", 2.0, 82.1, "Package 2", "147852369", "UCC");
     }
 
+    /**
+     * Tests getEmail and setEmail methods for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testEmail() throws Exception {
         assertThat(normalStudentMember1.getEmail(), is("student1@email.com"));
@@ -34,6 +45,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember2.getEmail(), is("123"));
     }
 
+    /**
+     * Tests getName and setName methods for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testName() throws Exception {
         assertThat(normalStudentMember1.getName(), is("Genji"));
@@ -49,6 +64,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember3.getName(), is("This name is longer than 30 ch"));
     }
 
+    /**
+     * Tests getAddress and setAddress for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testAddress() throws Exception {
         assertThat(normalStudentMember1.getAddress(), is("54 Fake Street, Waterford, Co.Waterford"));
@@ -61,6 +80,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember2.getAddress(), is("Example Address"));
     }
 
+    /**
+     * Tests getGender and setGender for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testGender() throws Exception {
         assertThat(normalStudentMember1.getGender(), is("M"));
@@ -77,6 +100,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember2.getGender(), is("F"));
     }
 
+    /**
+     * Tests getHeight and setHeight for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testHeight() throws Exception {
         assertThat(normalStudentMember1.getHeight(), is(2.1));
@@ -94,6 +121,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember3.getHeight(), is(1.0));
     }
 
+    /**
+     * Tests getStratingWeight and setStartingWeight for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testStartingWeight() throws Exception {
         assertThat(normalStudentMember1.getStartingWeight(), is(84.6));
@@ -108,6 +139,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember2.getStartingWeight(), is(250.0));
     }
 
+    /**
+     * Tests getStudentId and setStudentId for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testStudentID() throws Exception {
         assertThat(normalStudentMember1.getStudentId(), is("1234567"));
@@ -120,6 +155,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember2.getStudentId(), is("Valid Student ID"));
     }
 
+    /**
+     * Tests getCollegeName and setCollege for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testCollegeName() throws Exception {
         assertThat(normalStudentMember1.getCollegeName(), is("WIT"));
@@ -133,6 +172,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember3.getCollegeName(), is("NUIG"));
     }
 
+    /**
+     * Tests getChosenPackage and chosenPackage for StudentMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testChosenPackage() throws Exception {
         assertThat(normalStudentMember1.getChosenPackage(), is("WIT"));
@@ -149,6 +192,10 @@ public class StudentMemberTest {
         assertThat(normalStudentMember1.getChosenPackage(), is("Package 3"));
     }
 
+    /**
+     * Tests toString method for StudentMember class. Ensures the resulting sting contains the correct elements.
+     * @throws Exception if test fails
+     */
     @Test
     public void testToString() throws Exception {
         assertThat(normalStudentMember1.toString().contains("Genji"), is(true));
@@ -159,6 +206,9 @@ public class StudentMemberTest {
         assertThat(normalStudentMember3.toString().contains("Pharah"), is(false));
     }
 
+    /**
+     * Tears down test objects once the junit tests have been run
+     */
     @After
     public void tearDown() {
 

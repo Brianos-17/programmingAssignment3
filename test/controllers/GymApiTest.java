@@ -12,6 +12,9 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 11/05/2017.
+ * @author Brian O'Sullivan
+ *
+ * GymApi Test class. Performs junit testing on methods in the GymApi class
  */
 public class GymApiTest {
     private GymApi gym;
@@ -27,6 +30,10 @@ public class GymApiTest {
     private Assessment assessment5;
     private Assessment assessment6;
 
+    /**
+     * Creates new instances of model classes in order to perform junit tests of GymApi class methods
+     * @throws Exception if test fails
+     */
     @Before
     public void setUp() throws Exception {
         normalStudentMember1 = new StudentMember("student1@email.com", "Genji", "54 Fake Street, Waterford, Co.Waterford", "M", 2.1, 84.6, "WIT", "1234567", "WIT");
@@ -43,12 +50,20 @@ public class GymApiTest {
         gym = new GymApi();
     }
 
+    /**
+     * Tests that the members and trainers ArrayLists are empty before initialisation.
+     * @throws Exception if test fails
+     */
     @Test
     public void testEmptyArrayLists() throws Exception {
         assertThat(gym.members.size(), is(0));
         assertThat(gym.trainers.size(), is(0));
     }
 
+    /**
+     * Tests the addMember and numberOfMembers methods in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testAddingAndCountingMember() throws Exception {
         gym.addMember(normalStudentMember1);
@@ -57,6 +72,10 @@ public class GymApiTest {
         assertThat(gym.numberOfMembers(), is(2));
     }
 
+    /**
+     * Tests the addTrainer and numberOfTrainers methods in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testAddingAndCountingTrainer() throws Exception {
         gym.addTrainer(normalTrainer1);
@@ -65,6 +84,10 @@ public class GymApiTest {
         assertThat(gym.numberOfTrainers(), is(2));
     }
 
+    /**
+     * Tests getMembers method in the GymApi class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testGetMembers() throws Exception {
         assertTrue(gym.getMembers().isEmpty());
@@ -73,6 +96,10 @@ public class GymApiTest {
         assertNotNull(gym.getMembers());
     }
 
+    /**
+     * Tests the getTrainers method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testGetTrainers() throws Exception {
         assertTrue(gym.getTrainers().isEmpty());
@@ -81,6 +108,10 @@ public class GymApiTest {
         assertNotNull(gym.getTrainers());
     }
 
+    /**
+     * Tests the isValidMemberIndex method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testIsValidMemberIndex() throws Exception {
         gym.addMember(normalStudentMember1);
@@ -91,6 +122,10 @@ public class GymApiTest {
         assertThat(gym.isValidMemberIndex(2), is(false));
     }
 
+    /**
+     * Tests the isValidTrainerIndex method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testIsValidTrainerIndex() throws Exception {
         gym.addTrainer(normalTrainer1);
@@ -101,6 +136,10 @@ public class GymApiTest {
         assertThat(gym.isValidTrainerIndex(2), is(false));
     }
 
+    /**
+     * Tests the searchMembersByName method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testSearchMembersByName() throws Exception {
         assertThat(gym.searchMembersByName("Anything"), is("There are currently no members in the gym."));
@@ -113,6 +152,10 @@ public class GymApiTest {
         assertThat(gym.searchMembersByName("Tony Stark"), is(normalPremiumMember1.toString() + "\n"));
     }
 
+    /**
+     * Tests the searchMembersByEmail method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testSearchMembersByEmail() throws Exception {
         assertNull(gym.searchMembersByEmail("Not a real email"));
@@ -124,6 +167,10 @@ public class GymApiTest {
         assertThat(gym.searchMembersByEmail("email1@email.com"), is(normalPremiumMember1));
     }
 
+    /**
+     * Tests the searchTrainersByEmail method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testSearchTrainersByEmail() throws Exception {
         assertNull(gym.searchTrainersByEmail("brianos-17@hotmail.com"));
@@ -135,17 +182,25 @@ public class GymApiTest {
         assertNull(gym.searchTrainersByEmail("not a real email"));
     }
 
+    /**
+     * Tests the listMembers method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testListMembers() throws Exception {
         assertThat(gym.listMembers(), is("There are currently no members in this gym."));
         gym.addMember(normalStudentMember1);
-        assertThat(gym.listMembers(), is(normalStudentMember1.toString() + "\n"));
+        assertThat(gym.listMembers(), is("\n" + normalStudentMember1.toString() + "\n"));
         gym.addMember(normalStudentMember2);
-        assertThat(gym.listMembers(), is(normalStudentMember1.toString() + "\n" + normalStudentMember2.toString() + "\n"));
+        assertThat(gym.listMembers(), is("\n" + normalStudentMember1.toString() + "\n" + normalStudentMember2.toString() + "\n"));
         gym.addMember(normalPremiumMember1);
-        assertThat(gym.listMembers(), is(normalStudentMember1.toString() + "\n" + normalStudentMember2.toString() + "\n" + normalPremiumMember1.toString() + "\n"));
+        assertThat(gym.listMembers(), is("\n" + normalStudentMember1.toString() + "\n" + normalStudentMember2.toString() + "\n" + normalPremiumMember1.toString() + "\n"));
     }
 
+    /**
+     * Tests the getTrainers method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testListMembersWithIdealWeight() throws Exception {
         assertThat(gym.listMembersWithIdealWeight(), is("There are currently no members in the Gym."));
@@ -161,6 +216,10 @@ public class GymApiTest {
         assertThat(gym.listMembersWithIdealWeight(), is("The following members have an Ideal Body Weight: \n" + normalStudentMember1 + "\n" + normalPremiumMember1 + "\n"));
     }
 
+    /**
+     * Tests the listMembersBySpecificBMICategory method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testListMembersBySpecificBMICategory() throws Exception {
         assertThat(gym.listMembersBySpecificBMICategory("NORMAL"), is("There are currently no members in the Gym."));
@@ -185,6 +244,10 @@ public class GymApiTest {
         assertThat(gym.listMembersBySpecificBMICategory("VERY SEVERELY OBESE"), is(normalPremiumMember1 + "\n"));
     }
 
+    /**
+     * Tests the listMemberDetailsImperialAndMetric method in the GymApi class
+     * @throws Exception if test fails
+     */
     @Test
     public void testListMemberDetailsImperialAndMetric() throws Exception {
         assertThat(gym.listMemberDetailsImperialAndMetric(), is("There are currently no members in ths Gym."));
@@ -197,6 +260,9 @@ public class GymApiTest {
         assertThat(gym.listMemberDetailsImperialAndMetric(), is("Genji: 101.0KGs (222.2lbs) 2.1 Metres (82.67 inches).\nGenji 2: 74.0KGs (162.8lbs) 2.1 Metres (82.67 inches).\n"));
     }
 
+    /**
+     * Tears down test objects once the junit tests have been run
+     */
     @After
     public void tearDown() {
 

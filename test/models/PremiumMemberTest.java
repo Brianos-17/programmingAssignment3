@@ -8,17 +8,28 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 11/05/2017.
+ * @author Brian O'Sullivan
+ *
+ * PremiumMember Test class. Performs junit testing on methods in the PremiumMember class
  */
 public class PremiumMemberTest {
     private PremiumMember normalPremiumMember1;
     private PremiumMember normalPremiumMember2;
 
+    /**
+     * Creates new instances of model classes in order to perform junit tests of PremiumMembers class methods
+     * @throws Exception if test fails
+     */
     @Before
     public void set() throws Exception {
         normalPremiumMember1 = new PremiumMember("email1@email.com", "Tony Stark", "Avengers Tower, New York, America", "Male", 1.8, 76, "Package 1");
         normalPremiumMember2 = new PremiumMember("email2@email.com", "Black Widow", "52 Boradway, New York, America", "Female", 1.5, 67, "Package 2");
     }
 
+    /**
+     * Tests getEmail and setEmail for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testEmail() throws Exception {
         assertThat(normalPremiumMember1.getEmail(), is("email1@email.com"));
@@ -31,6 +42,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.getEmail(), is("ForExample@hotmail.com"));
     }
 
+    /**
+     * Tests getName and setName for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testName() throws Exception {
         assertThat(normalPremiumMember1.getName(), is("Tony Stark"));
@@ -45,6 +60,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember1.getName(), is("This name is longer than 30 ch"));
     }
 
+    /**
+     * Tests getAddress and setAddress for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testAddress() throws Exception {
         assertThat(normalPremiumMember1.getAddress(), is("Avengers Tower, New York, America"));
@@ -57,6 +76,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.getAddress(), is("Example Address"));
     }
 
+    /**
+     * Tests getGender and setGender for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testGender() throws Exception {
         assertThat(normalPremiumMember1.getGender(), is("M"));
@@ -73,6 +96,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.getGender(), is("F"));
     }
 
+    /**
+     * Tests getHeight and setHeight for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testHeight() throws Exception {
         assertThat(normalPremiumMember1.getHeight(), is(1.8));
@@ -89,6 +116,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember1.getHeight(), is(1.0));
     }
 
+    /**
+     * Tests getStartingWeight and setStartingWeight for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testStartingWeight() throws Exception {
         assertThat(normalPremiumMember1.getStartingWeight(), is(76.0));
@@ -103,6 +134,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.getStartingWeight(), is(250.0));
     }
 
+    /**
+     * Tests getChosenPackage and setChosenPackage for PremiumMember class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testChosenPackage() throws Exception {
         normalPremiumMember1.chosenPackage("Package 1");
@@ -112,6 +147,10 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.getChosenPackage(), is("Package 3"));
     }
 
+    /**
+     * Tests toString method for PremiumMember class. Ensures the resulting sting contains the correct elements.
+     * @throws Exception if test fails
+     */
     @Test
     public void testToString() throws Exception {
         assertThat(normalPremiumMember1.toString().contains("Tony Stark"), is(true));
@@ -122,6 +161,9 @@ public class PremiumMemberTest {
         assertThat(normalPremiumMember2.toString().contains("1.5"), is(true));
     }
 
+    /**
+     * Tears down test objects once the junit tests have been run
+     */
     @After
     public void tearDown() {
 

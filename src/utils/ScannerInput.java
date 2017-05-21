@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by Brian on 24/04/2017.
- *@author Brian O'Sullivan
+ * @author Brian O'Sullivan
  *
  * ScannerInput class holds static methods used to read users inputs
  *

@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 11/05/2017.
+ * @author Brian O'Sullivan
+ *
+ * Assessment Test class. Performs junit testing on methods in the Assessment class
  */
 public class AssessmentTest {
     private Assessment assessment1;
@@ -15,12 +18,20 @@ public class AssessmentTest {
     private Trainer trainer1;
     private Trainer trainer2;
 
+    /**
+     * Creates new instances of model classes in order to perform junit tests of Assessment class methods
+     * @throws Exception if test fails
+     */
     @Before
     public void setUp() throws Exception {
         assessment1 = new Assessment(89.5, 40, 25, 20, 32, 38, "Very Good", trainer1);
         assessment2 = new Assessment(150, 50, 42, 33, 43, 49, "Needs Improvement", trainer2);
     }
 
+    /**
+     * Tests getWeight and setWeight for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testWeight() throws Exception {
         assertThat(assessment1.getWeight(), is(89.5));
@@ -31,6 +42,10 @@ public class AssessmentTest {
         assertThat(assessment2.getWeight(), is(50.0));
     }
 
+    /**
+     * Tests getChest and setChest for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testChest() throws Exception {
         assertThat(assessment1.getChest(), is(40.0));
@@ -41,6 +56,10 @@ public class AssessmentTest {
         assertThat(assessment2.getChest(), is(72.0));
     }
 
+    /**
+     * Tests getThigh and setThigh for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testThigh() throws Exception {
         assertThat(assessment1.getThigh(), is(25.0));
@@ -51,6 +70,10 @@ public class AssessmentTest {
         assertThat(assessment2.getThigh(), is(50.0));
     }
 
+    /**
+     * Tests getUpperArm and setUpperArm for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testUpperArm() throws Exception {
         assertThat(assessment1.getUpperArm(), is(20.0));
@@ -61,6 +84,10 @@ public class AssessmentTest {
         assertThat(assessment2.getUpperArm(), is(15.0));
     }
 
+    /**
+     * Tests getWaist and setWaist for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testWaist() throws Exception {
         assertThat(assessment1.getWaist(), is(32.0));
@@ -71,6 +98,10 @@ public class AssessmentTest {
         assertThat(assessment2.getWaist(), is(10.0));
     }
 
+    /**
+     * Tests getHips and setHips for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testHips() throws Exception {
         assertThat(assessment1.getHips(), is(38.0));
@@ -81,6 +112,10 @@ public class AssessmentTest {
         assertThat(assessment2.getHips(), is(700.0));
     }
 
+    /**
+     * Tests getComment and setComment for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testComment() throws Exception {
         assertThat(assessment1.getComment(), is("Very Good"));
@@ -91,6 +126,10 @@ public class AssessmentTest {
         assertThat(assessment2.getComment(), is("You're fine"));
     }
 
+    /**
+     * Tests getTrainer and setTrainer for Assessment class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testTrainer() throws Exception {
         assertThat(assessment1.getTrainer(), is(trainer1));
@@ -101,6 +140,9 @@ public class AssessmentTest {
         assertThat(assessment2.getTrainer(), is(trainer1));
     }
 
+    /**
+     * Tears down test objects once the junit tests have been run
+     */
     @After
     public void tearDown() {
 

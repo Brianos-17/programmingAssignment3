@@ -185,7 +185,7 @@ public class GymApi {
      */
     public String listMembers() {
         if (members.size() > 0) {
-            String list = "";
+            String list = "\n";
             for (int i = 0; i < members.size(); i++) {
                 list = list + members.get(i).toString() + "\n";
             }

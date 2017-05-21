@@ -14,9 +14,10 @@ import static utils.ScannerInput.*;
 
 /**
  * Created by Brian on 26/04/2017.
- * @author Brian O'Sullivan
  *
- * MenuController Class. Allows users to sign up, log in and interact with the gym app
+ * @author Brian O'Sullivan
+ *         <p>
+ *         MenuController Class. Allows users to sign up, log in and interact with the gym app
  */
 public class MenuController {
     private GymApi gym;
@@ -27,6 +28,7 @@ public class MenuController {
 
     /**
      * Default main method which kicks of when the program is launched. Runs the MenuController constructor
+     *
      * @param args String[]
      */
     public static void main(String[] args) {
@@ -61,6 +63,12 @@ public class MenuController {
      * Otherwise only the register option is given
      */
     private void membersInGym() {
+        try {
+            gym.load();
+            System.out.println("Checking for any available gym data...");
+        } catch (Exception e) {
+            System.err.println("Error reading from file: " + e);
+        }
         if (gym.members.size() > 0) {
             membersInGym = true;
         }
@@ -73,15 +81,9 @@ public class MenuController {
      * If a user fails their log in authentication the system will automatically exit
      */
     private void welcomeMenu() {
-        try {
-            gym.load();
-            System.out.println("Checking for any available gym data...");
-        } catch (Exception e) {
-            System.err.println("Error reading from file: " + e);
-        }
         System.out.println("Welcome to your very own personal gym app!");
         System.out.println("---------------");
-        if (membersInGym = true) {
+        if (membersInGym) {
             String input = validNextString("Would you like to Login to your account or Register a new one? [L/R]");
             if (input.toUpperCase().equals("L")) {
                 String memberOrTrainer = validNextString("Are you logging in as a Member or as a Trainer? [M/T]");
@@ -117,7 +119,8 @@ public class MenuController {
 
     /**
      * Method which prints out the options available to the user while running the member menu
-     * @return int representing the option the user whishes to use in the runMemberMenu method
+     *
+     * @return int representing the option the user wishes to use in the runMemberMenu method
      */
     private int memberMenu() {
         System.out.println("Welcome to your Member menu!");
@@ -133,6 +136,7 @@ public class MenuController {
 
     /**
      * Method which prints out the options available to the user while running the sub section of the member menu
+     *
      * @return int representing the option the user wishes to carry out
      */
     private int memberSubMenu() {
@@ -154,6 +158,7 @@ public class MenuController {
 
     /**
      * Method which prints out the options available to the user while running the runTrainerMenu method
+     *
      * @return int representing the option the users wishes to carry out
      */
     private int trainerMenu() {
@@ -176,6 +181,7 @@ public class MenuController {
 
     /**
      * Method which prints out the options available to the user in the assessment sub menu of the trainer menu
+     *
      * @return int representing the option the user wishes to carry out
      */
     private int assessmentSubMenu() {
@@ -192,6 +198,7 @@ public class MenuController {
 
     /**
      * Method which prints out the options available in the report sub menu of the trainer menu
+     *
      * @return int representing the option the user wishes to carry out
      */
     private int reportSubMenu() {
@@ -259,7 +266,7 @@ public class MenuController {
                     registerMember();
                     break;
                 case 2:
-                    gym.listMembers();
+                    System.out.println(gym.listMembers());
                     break;
                 case 3:
                     String emailSearch = validNextString("Please enter the email you wish to search by: ");
@@ -270,22 +277,38 @@ public class MenuController {
                     System.out.println(gym.searchMembersByName(nameSearch));
                     break;
                 case 5: //List members with an ideal body weight
-                    gym.listMembersWithIdealWeight();
+                    System.out.println(gym.listMembersWithIdealWeight());
                     break;
                 case 6: //List members with a specific BMI category
                     System.out.println("Please select the category of BMI you wish to search by: "
-                            + "\n VERY SEVERELY UNDERWEIGHT"
-                            + "\n SEVERELY UNDERWEIGHT"
-                            + "\n UNDERWEIGHT"
-                            + "\n NORMAL"
-                            + "\n OVERWEIGHT"
-                            + "\n MODERATELY OBESE"
-                            + "\n SEVERELY OBESE"
-                            + "\n VERY SEVERELY OBESE");
-                    input.nextLine();
-                    String category = input.nextLine();
-                    gym.listMembersBySpecificBMICategory(category);
-                    break;
+                            + "\n 1) VERY SEVERELY UNDERWEIGHT"
+                            + "\n 2) SEVERELY UNDERWEIGHT"
+                            + "\n 3) UNDERWEIGHT"
+                            + "\n 4) NORMAL"
+                            + "\n 5) OVERWEIGHT"
+                            + "\n 6) MODERATELY OBESE"
+                            + "\n 7) SEVERELY OBESE"
+                            + "\n 8) VERY SEVERELY OBESE");
+                    int category = input.nextInt();
+                    if (category == 1) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("VERY SEVERELY UNDERWEIGHT"));
+                    } else if (category == 2) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("SEVERELY UNDERWEIGHT"));
+                    } else if (category == 3) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("UNDERWEIGHT"));
+                    } else if (category == 4) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("NORMAL"));
+                    } else if (category == 5) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("OVERWEIGHT"));
+                    } else if (category == 6) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("MODERATELY OBESE"));
+                    } else if (category == 7) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("SEVERELY OBESE"));
+                    } else if (category == 8) {
+                        System.out.println(gym.listMembersBySpecificBMICategory("VERY SEVERELY OBESE"));
+                    }
+                    else System.out.println("Invalid option. Please try again");
+                        break;
                 case 7: //Assessment Sub menu
                     int assessmentOption = assessmentSubMenu();
                     while (assessmentOption != 0) {
@@ -502,6 +525,7 @@ public class MenuController {
     /**
      * Method which allows a user to look up the progress of a specific member based on their email address.
      * Returns a list in reverse chronological order of the dates and the specific measurement the user has requested
+     *
      * @param email String representing the email for a specific member
      */
     private void progressReport(String email) {

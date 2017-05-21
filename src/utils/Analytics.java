@@ -22,7 +22,7 @@ public class Analytics {
     }
 
     /**
-     * Method which determines which BMI category a member falls into bassed oof of their BMI value calculated previously
+     * Method which determines which BMI category a member falls into based of of their BMI value calculated previously
      * @param bmiValue double representing the members BMI value
      * @return String determining which category the member falls into
      */

@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 02/05/2017.
+ * @author Brian O'Sullivan
+ *
+ * Trainer Test class. Performs junit testing on methods in the Trainer class
  */
 public class TrainerTest {
     private Trainer normalTrainer1;
@@ -15,6 +18,10 @@ public class TrainerTest {
     private Trainer invalidTrainer1;
     private Trainer invalidTrainer2;
 
+    /**
+     * Creates new instances of model classes in order to perform junit tests of Trainer class methods
+     * @throws Exception if test fails
+     */
     @Before
     public void setUp() throws Exception{
         normalTrainer1 = new Trainer("brianos-17@hotmail.com", "Brian O'Sullivan", "11 Manor Drive, Manor Village, Tralee, Co. Kerry", "Male" ,"Cardio");
@@ -23,6 +30,10 @@ public class TrainerTest {
         invalidTrainer2 = new Trainer("email", "Mary O'Shea", "24 New Drive, Waterford, Co. Waterford", "Fmail", "Weights");
     }
 
+    /**
+     * Tests getSpeciality for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void getSpeciality() throws Exception {
         assertThat(normalTrainer1.getSpeciality(), is("Cardio"));
@@ -31,6 +42,10 @@ public class TrainerTest {
         assertThat(invalidTrainer2.getSpeciality().equals("Test"), is(false));
     }
 
+    /**
+     * Tests setSpeciality and setSpeciality for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void setSpeciality() throws Exception {
         normalTrainer1.setSpeciality("Weights");
@@ -39,6 +54,10 @@ public class TrainerTest {
         assertThat(normalTrainer2.getSpeciality(), is ("Cardio"));
     }
 
+    /**
+     * Tests toString method for Trainer class. Ensures the resulting sting contains the correct elements.
+     * @throws Exception if test fails
+     */
     @Test
     public void testToString() throws Exception {
         assertThat(normalTrainer1.toString().contains("Brian O'Sullivan"), is(true));
@@ -51,7 +70,10 @@ public class TrainerTest {
         assertThat(invalidTrainer2.toString().contains("email"), is(true));
     }
 
-    //Tests both getter and setter for email
+    /**
+     * Tests getEmail and setEmail for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testEmail() throws Exception{
         assertThat(normalTrainer1.getEmail(), is("brianos-17@hotmail.com"));
@@ -62,7 +84,10 @@ public class TrainerTest {
         assertThat(normalTrainer2.getEmail().equals("sarah-17@hotmail.com"), is(false));
     }
 
-    //Tests both getter and setter for name
+    /**
+     * Tests getName and setName for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testName()  throws Exception {
         assertThat(normalTrainer1.getName().equals("Brian O'Sullivan"), is(true));
@@ -74,7 +99,10 @@ public class TrainerTest {
         assertThat(normalTrainer2.getName().equals("Jessica Jones"), is(true));
     }
 
-    //Tests both getter and setter for address
+    /**
+     * Tests getAddress and setAddress for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testAddress() throws Exception {
         assertThat(normalTrainer1.getAddress(), is("11 Manor Drive, Manor Village, Tralee, Co. Kerry"));
@@ -86,7 +114,10 @@ public class TrainerTest {
         assertThat(normalTrainer2.getAddress().equals("5 Calder House, Brownes Road, Waterford, Co. Waterford"), is(false));
     }
 
-    //Tests both getter and setter for gender
+    /**
+     * Tests getGender and setGender for Trainer class.
+     * @throws Exception if test fails
+     */
     @Test
     public void testGender() throws Exception {
         assertThat(normalTrainer1.getGender(), is("M"));
@@ -103,6 +134,9 @@ public class TrainerTest {
         assertThat(normalTrainer2.getGender(), is("F"));
     }
 
+    /**
+     * Tears down test objects once the junit tests have been run
+     */
     @After
     public void tearDown() {
 
