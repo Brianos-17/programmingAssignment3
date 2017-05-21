@@ -476,8 +476,8 @@ public class MenuController {
                 System.out.println("\n" + key + "\t" + value);
             }
             String chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
-            while (!(chosenPackage.equals("Package 1")) || (chosenPackage.equals("Package 2")) || (chosenPackage.equals("Package 3"))
-                    || (chosenPackage.equals("WIT"))) {
+            while (!((chosenPackage.equals("Package 1")) || (chosenPackage.equals("Package 2")) || (chosenPackage.equals("Package 3"))
+                    || (chosenPackage.equals("WIT")))) {
                 System.err.println("Invalid option entered. Please choose one of the above packages");
                 chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
             }
@@ -545,8 +545,8 @@ public class MenuController {
         String g = validNextString("Would you like to update your chosen package? [Y/N]");
         if (g.toUpperCase().equals("Y")) {
             String updateChosenPackage = validNextString("Please enter your updated package: ");
-            while (!(updateChosenPackage.equals("Package 1")) || (updateChosenPackage.equals("Package 2")) || (updateChosenPackage.equals("Package 3"))
-                    || (updateChosenPackage.equals("WIT"))) {
+            while (!((updateChosenPackage.equals("Package 1")) || (updateChosenPackage.equals("Package 2")) || (updateChosenPackage.equals("Package 3"))
+                    || (updateChosenPackage.equals("WIT")))) {
                 System.err.println("Invalid option entered. Please enter a valid package.");
                 updateChosenPackage = validNextString("Please enter your updated package: ");
             }

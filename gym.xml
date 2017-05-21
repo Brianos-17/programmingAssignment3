@@ -50,6 +50,18 @@
       <studentId>8753</studentId>
       <collegeName>WIT</collegeName>
     </models.StudentMember>
+    <models.StudentMember>
+      <email>steve@rogers.com</email>
+      <name>Steve Rogers</name>
+      <address>123 Street</address>
+      <gender>M</gender>
+      <height>1.9</height>
+      <startingWeight>72.5</startingWeight>
+      <chosenPackage>WIT</chosenPackage>
+      <memberProgress/>
+      <studentId>20058974</studentId>
+      <collegeName>WIT</collegeName>
+    </models.StudentMember>
   </list>
   <list>
     <models.Trainer>
