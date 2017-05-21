@@ -16,8 +16,7 @@ import static utils.ScannerInput.*;
  * Created by Brian on 26/04/2017.
  *
  * @author Brian O'Sullivan
- *         <p>
- *         MenuController Class. Allows users to sign up, log in and interact with the gym app
+ * MenuController Class. Allows users to sign up, log in and interact with the gym app
  */
 public class MenuController {
     private GymApi gym;
@@ -28,7 +27,6 @@ public class MenuController {
 
     /**
      * Default main method which kicks of when the program is launched. Runs the MenuController constructor
-     *
      * @param args String[]
      */
     public static void main(String[] args) {
@@ -430,6 +428,10 @@ public class MenuController {
         } else if (memberOrTrainer.toUpperCase().equals("T")) {
             System.out.println("Please enter your details: ");
             String email = validNextString("Please enter your email: ");
+            while (gym.searchTrainersByEmail(email) != null) {
+                System.err.println("We're sorry, but there is already a trainer registered with this email. Please try again");
+                email = validNextString("Please enter your email: ");
+            }
             String name = validNextString("Please enter your name: ");
             String address = validNextString("Please enter your address: ");
             String gender = validNextString("Please enter your gender [M/F]: ");
@@ -452,7 +454,7 @@ public class MenuController {
             System.out.println("Please enter your details: ");
             email = validNextString("Please enter your email: ");
             while (gym.searchMembersByEmail(email) != null) {
-                System.out.print("Sorry but that email is currently registered to another user.\nPlease try again.");
+                System.err.print("Sorry but that email is currently registered to another user.\nPlease try again.");
                 email = validNextString("Please enter your email: ");
             }
             String name = validNextString("Please enter your name: ");
@@ -468,14 +470,13 @@ public class MenuController {
                 System.err.println("Invalid option entered. Please enter a starting weight between 35 and 250 KGs.");
                 startingWeight = validNextDouble("Please enter your current weight(in KGs): ");
             }
-            System.out.println("Gym Packages: ");
-            for(Map.Entry<String, String> chosenPackage: chosenPackage.entrySet()) {
+            for (Map.Entry<String, String> chosenPackage : chosenPackage.entrySet()) {
                 String key = chosenPackage.getKey();
                 String value = chosenPackage.getValue();
                 System.out.println("\n" + key + "\t" + value);
             }
             String chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
-            while(!(chosenPackage.equals("Package 1")) || (chosenPackage.equals("Package 2")) || (chosenPackage.equals("Package 3"))
+            while (!(chosenPackage.equals("Package 1")) || (chosenPackage.equals("Package 2")) || (chosenPackage.equals("Package 3"))
                     || (chosenPackage.equals("WIT"))) {
                 System.err.println("Invalid option entered. Please choose one of the above packages");
                 chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
@@ -544,7 +545,7 @@ public class MenuController {
         String g = validNextString("Would you like to update your chosen package? [Y/N]");
         if (g.toUpperCase().equals("Y")) {
             String updateChosenPackage = validNextString("Please enter your updated package: ");
-            while(!(updateChosenPackage.equals("Package 1")) || (updateChosenPackage.equals("Package 2")) || (updateChosenPackage.equals("Package 3"))
+            while (!(updateChosenPackage.equals("Package 1")) || (updateChosenPackage.equals("Package 2")) || (updateChosenPackage.equals("Package 3"))
                     || (updateChosenPackage.equals("WIT"))) {
                 System.err.println("Invalid option entered. Please enter a valid package.");
                 updateChosenPackage = validNextString("Please enter your updated package: ");
