@@ -46,7 +46,7 @@ public class MenuController {
         gym = new GymApi();
         chosenPackage = new HashMap<>();
         chosenPackage.put("Package 1", "Allowed access anytime to gym.\nFree access to all classes.\n" +
-                "\\nAccess to all changing areas including deluxe changing rooms.");
+                "\nAccess to all changing areas including deluxe changing rooms.");
         chosenPackage.put("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes." +
                 "\nAccess to all changing areas including deluxe changing rooms.");
         chosenPackage.put("Package 3", "Allowed access to gym at off-peak times.\n€5 fee for all" +
@@ -306,9 +306,8 @@ public class MenuController {
                         System.out.println(gym.listMembersBySpecificBMICategory("SEVERELY OBESE"));
                     } else if (category == 8) {
                         System.out.println(gym.listMembersBySpecificBMICategory("VERY SEVERELY OBESE"));
-                    }
-                    else System.out.println("Invalid option. Please try again");
-                        break;
+                    } else System.out.println("Invalid option. Please try again");
+                    break;
                 case 7: //Assessment Sub menu
                     int assessmentOption = assessmentSubMenu();
                     while (assessmentOption != 0) {
@@ -460,8 +459,27 @@ public class MenuController {
             String address = validNextString("Please enter your address: ");
             String gender = validNextString("Please enter your gender [M/F]: ");
             double height = validNextDouble("Please enter your height(in Metres): ");
+            while ((height < 1) || (height > 3)) {
+                System.err.println("Invalid option entered. Please choose a height between 1 and 3 meters.");
+                height = validNextDouble("Please enter your height(in Metres): ");
+            }
             double startingWeight = validNextDouble("Please enter your current weight(in KGs): ");
-            String chosenPackage = validNextString("Please enter your chosen gym package: ");
+            while ((startingWeight < 35) || (startingWeight > 250)) {
+                System.err.println("Invalid option entered. Please enter a starting weight between 35 and 250 KGs.");
+                startingWeight = validNextDouble("Please enter your current weight(in KGs): ");
+            }
+            System.out.println("Gym Packages: ");
+            for(Map.Entry<String, String> chosenPackage: chosenPackage.entrySet()) {
+                String key = chosenPackage.getKey();
+                String value = chosenPackage.getValue();
+                System.out.println("\n" + key + "\t" + value);
+            }
+            String chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
+            while(!(chosenPackage.equals("Package 1")) || (chosenPackage.equals("Package 2")) || (chosenPackage.equals("Package 3"))
+                    || (chosenPackage.equals("WIT"))) {
+                System.err.println("Invalid option entered. Please choose one of the above packages");
+                chosenPackage = validNextString("Please enter your chosen gym package from the above: ");
+            }
             if (input.toUpperCase().equals("S")) {
                 String studentId = validNextString("Please enter your Student ID: ");
                 String collegeName = validNextString("Please enter your College's Name: ");
@@ -508,16 +526,29 @@ public class MenuController {
         String e = validNextString("Would you like to update your height? [Y/N]");
         if (e.toUpperCase().equals("Y")) {
             double updateHeight = validNextDouble("Please enter your new height(in metres): ");
+            while ((updateHeight < 1) || (updateHeight > 3)) {
+                System.err.println("Invalid option entered. Please choose a height between 1 and 3 meters.");
+                updateHeight = validNextDouble("Please enter your height(in Metres): ");
+            }
             currentMember.setHeight(updateHeight);
         }
         String f = validNextString("Would you like to update your starting weight? [Y/N]");
         if (f.toUpperCase().equals("Y")) {
             double updateStartingWeight = validNextDouble("Please enter your new starting weight(in Kgs): ");
+            while ((updateStartingWeight < 35) || (updateStartingWeight > 250)) {
+                System.err.println("Invalid option entered. Please enter a starting weight between 35 and 250 KGs.");
+                updateStartingWeight = validNextDouble("Please enter your current weight(in KGs): ");
+            }
             currentMember.setStartingWeight(updateStartingWeight);
         }
         String g = validNextString("Would you like to update your chosen package? [Y/N]");
         if (g.toUpperCase().equals("Y")) {
             String updateChosenPackage = validNextString("Please enter your updated package: ");
+            while(!(updateChosenPackage.equals("Package 1")) || (updateChosenPackage.equals("Package 2")) || (updateChosenPackage.equals("Package 3"))
+                    || (updateChosenPackage.equals("WIT"))) {
+                System.err.println("Invalid option entered. Please enter a valid package.");
+                updateChosenPackage = validNextString("Please enter your updated package: ");
+            }
             currentMember.setChosenPackage(updateChosenPackage);
         }
     }

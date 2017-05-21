@@ -2,13 +2,7 @@ package controllers;
 
 import com.google.gson.*;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.parser.JSONParser;
 import models.Member;
-import models.StudentMember;
 import models.Trainer;
 
 import static utils.Analytics.*;
@@ -17,14 +11,8 @@ import java.io.*;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import utils.StudentMemberInstanceCreator;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 
 /**

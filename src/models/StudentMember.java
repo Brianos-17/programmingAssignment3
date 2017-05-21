@@ -1,8 +1,5 @@
 package models;
 
-import com.google.gson.GsonBuilder;
-import utils.StudentMemberInstanceCreator;
-
 /**
  * Created by Brian on 24/04/2017.
  * @author Brian O'Sullivan
@@ -32,8 +29,6 @@ public class StudentMember extends Member {
         setStudentId(studentId);
         setCollegeName(collegeName);
         chosenPackage(chosenPackage);
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(StudentMember.class, new StudentMemberInstanceCreator(email, name, address, gender, height, startingWeight, chosenPackage, studentId, collegeName));
     }
 
     /**
